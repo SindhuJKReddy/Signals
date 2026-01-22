@@ -1,0 +1,56 @@
+/* tr td {
+    padding: 2rem;
+} */
+.header-section{
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 1rem;
+  
+}
+   
+.header-section h2 {
+    flex: 1;
+}
+
+.add-button{
+    background-color: #1976d2;
+    border-color: #1976d2;
+}
+
+.filters {
+    display: flex;
+    gap: 1rem;
+}
+
+.global-search {
+    width: 1050px;
+}
+
+.table-actions {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 17px;
+}
+
+/* Selection bar container */
+.selection-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1rem;
+  padding: 0.75rem 1rem;
+  background: #e9f1fd; 
+  border-radius: 8px;
+}
+
+.selected-count {
+  color: #0d6efd; 
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.selection-bar .p-button {
+  margin-left: auto;
+}
+

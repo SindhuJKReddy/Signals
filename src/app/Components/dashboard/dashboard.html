@@ -1,0 +1,140 @@
+<h3 class="dashboard-title">Dashboard</h3>
+<p class="dashboard-subtitle">Overview of school management system</p>
+
+<div class="dashboard-cards">
+
+    <div class="card">
+
+        <span 
+        class="trend" 
+        [class.positive]="studentGrowth() > 0" 
+        [class.negative]="studentGrowth() < 0">
+
+            <i class="pi" 
+               [class.pi-arrow-up]="studentGrowth() > 0" 
+               [class.pi-arrow-down]="studentGrowth() < 0">
+            </i>
+            {{ studentGrowth() }}%
+
+        </span>
+
+        <div class="card-icon blue">
+            <i class="pi pi-graduation-cap"></i>
+        </div>
+
+        <div class="card-content">
+            <h3>{{ totalStudents() }}</h3>
+            <p>Total Students</p>
+            <small>{{ activeStudents() }} active, {{ graduatedStudents() }} graduated</small>
+        </div>
+    </div>
+
+    <div class="card">
+
+        <span class="trend positive">
+            <i class="pi pi-arrow-up"></i> +5%
+        </span>
+
+        <div class="card-icon green">
+            <i class="pi pi-user"></i>
+        </div>
+
+        <div class="card-content">
+            <h3>{{ totalTeachers() }}</h3>
+            <p>Total Teachers</p>
+            <small>Across all departments</small>
+        </div>
+    </div>
+
+    <div class="card">
+
+        <span class="trend positive">
+            <i class="pi pi-arrow-up"></i> +3%
+        </span>
+
+        <div class="card-icon purple">
+            <i class="pi pi-briefcase"></i>
+        </div>
+
+        <div class="card-content">
+            <h3>{{ totalWorkers() }}</h3>
+            <p>Total Workers</p>
+            <small>Support staff members</small>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-icon orange">
+            <i class="pi pi-calendar"></i>
+        </div>
+
+        <div class="card-content">
+            <h3>{{ academicYear }}</h3>
+            <p>Academic Year</p>
+            <small>Current semester: {{ currentSemester }}</small>
+        </div>
+    </div>
+</div>
+
+<!-- Charts -->
+<div class="charts-section">
+
+    <!-- Graph Chart -->
+    <div class=" card">
+        <h4>Student Enrollment Trend</h4>
+        <p-chart type="line" [data]="enrollmentData()" [options]="chartOptions"></p-chart>
+    </div>
+
+    <!-- Bar Chart -->
+    <div class=" card">
+        <h4>Students by Grade</h4>
+
+        <p-chart type="bar" [data]="studentsByGradeData()" [options]="studentsByGradeOptions" class="bar-chart">
+        </p-chart>
+    </div>
+
+
+    <!-- PIE CHART -->
+    <div class="card ">
+        <h4>Student status distribution</h4>
+        <p-chart type="pie" [data]="studentStatusDistribution()" [options]="studentStatusOptions" class="pie-chart" />
+    </div>
+
+    <!-- vertical bar/ Department overview -->
+    <div class="card">
+        <h4>Department Overview</h4>
+        <p-chart type="bar" [data]="departmentOverview()" [options]="departmentOptions" class="vertical-bar" />
+    </div>
+</div>
+
+<!-- Quick stats Summary-->
+<div class="footer">
+    <h3>Quick Stats Summary</h3>
+    <div class="quick-stats">
+        
+        <div class="stat blue">
+
+
+            <div>
+                <p class="stat-label">Average Student to Teacher Ratio</p>
+                <h4>{{ averageStudentsPerTeacher() }}</h4>
+            </div>
+        </div>
+
+        <div class="stat green">
+
+            <div>
+                <p class="stat-label">Student Retention Rate</p>
+                <h4>{{ studentRetentionRate() }}%</h4>
+            </div>
+        </div>
+
+        <div class="stat purple ">
+
+            <div>
+                <p class="stat-label">Worker : Teacher Ratio</p>
+                <h4>{{ workerToTeacherRatio() }}</h4>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,71 @@
+<p-dialog header="Add Worker" [visible]="workerService.addDialogVisible()"
+  (visibleChange)="workerService.addDialogVisible.set($event)" [modal]="true" [closable]="true"
+  [style]="{ width: '650px' }" (onHide)="cancel()">
+
+  <form #addForm="ngForm">
+
+  <div class="p-fluid add-form" *ngIf="worker as t">
+
+      <div class="p-field">
+        <label>Name <span class="required">*</span></label>
+        <input
+          pInputText
+          name="name"
+          [(ngModel)]="t.name"
+          required
+          #name="ngModel"
+        /><br>
+        <small class="error" *ngIf="name.invalid && name.touched">
+          Name is required
+        </small>
+      </div>
+
+    <div class="p-field">
+      <label>Email <span class="required">*</span></label>
+        <input
+          pInputText
+          name="email"
+          [(ngModel)]="t.email"
+          required
+          #email="ngModel"
+        /><br>
+        <small class="error" *ngIf="email.invalid && email.touched">
+          Email is required
+        </small>
+    </div>
+
+    <div class="p-field">
+      <label for="role">Role<span class="required">*</span></label>
+      <input pInputText name="role" id="role" [(ngModel)]="worker.role" />
+    </div>
+
+    <div class="p-field">
+      <label for="department">Department<span class="required">*</span></label>
+      <input pInputText name="department" id="department" [(ngModel)]="worker.department" />
+    </div>
+
+    <div class="p-field">
+      <label for="shift">Shift<span class="required">*</span></label>
+      <input pInputText name="shift" id="shift" [(ngModel)]="worker.shift" />
+    </div>
+
+    <div class="p-field">
+      <label>Status <span class="required">*</span></label>
+      <select class="select" name="status" [(ngModel)]="status">
+        <option value="Active">Active</option>
+        <option value="Inactive">Inactive</option>
+        <option value="On Leave">On Leave</option>
+        
+      </select>
+    </div>
+  </div>
+
+  <div class="buttons">
+    <button pButton type="button" label="Cancel" class="p-button-outlined" (click)="cancel()"></button>
+
+    <button pButton type="button" label="Update" class="p-button-primary" (click)="save()"></button>
+  </div>
+
+  </form>
+
+</p-dialog>

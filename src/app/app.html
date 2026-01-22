@@ -1,0 +1,32 @@
+<div class=container>
+  <div class="sidebar">
+    <h2 class="title">{{ title }}</h2>
+
+    <a routerLink="/dashboard" routerLinkActive="active">
+      <i class="pi pi-objects-column"></i>
+       Dashboard</a>
+
+    <a routerLink="/student-list" routerLinkActive="active">
+      <i class="pi pi-graduation-cap"></i>
+       Students</a>
+
+    <a routerLink="/teachers-list" routerLinkActive="active">
+      <i class="pi pi-users"></i> 
+      Teachers</a>
+
+    <a routerLink="/workers-list" routerLinkActive="active">
+      <i class="pi pi-briefcase"></i>
+       Workers</a>
+
+       <div class="theme-toggle" (click)="toggleTheme()">
+           <i class="pi" [class.pi-moon]="!isDark" [class.pi-sun]="isDark"></i>
+           <span>{{ isDark ? 'Light Mode' : 'Dark Mode' }}</span>
+      </div>
+      
+  </div>
+  
+  <main class="main-content">
+    <router-outlet />
+  </main>
+
+</div>

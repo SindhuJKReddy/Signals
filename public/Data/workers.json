@@ -1,0 +1,109 @@
+[
+  {
+    "name": "Alice Johnson",
+    "email": "alice.johnson@example.com",
+    "role": "Supervisor",
+    "department": "Operations",
+    "shift": "Morning",
+    "status": "Active"
+    
+  },
+  {
+    "name": "Bob Smith",
+    "email": "bob.smith@example.com",
+    "role": "Technician",
+    "department": "Maintenance",
+    "shift": "Evening",
+    "status": "Active"
+    
+  },
+  {
+    "name": "Carol Davis",
+    "email": "carol.davis@example.com",
+    "role": "Manager",
+    "department": "HR",
+    "shift": "Morning",
+    "status": "On Leave"
+    
+  },
+  {
+    "name": "David Wilson",
+    "email": "david.wilson@example.com",
+    "role": "Operator",
+    "department": "Production",
+    "shift": "Night",
+    "status": "Inactive"
+  },
+   
+  {
+    "name": "Eva Brown",
+    "email": "eva.brown@example.com",
+    "role": "Analyst",
+    "department": "Finance",
+    "shift": "Morning",
+    "status": "Active"
+    
+  },
+  {
+    "name": "Frank Miller",
+    "email": "frank.miller@example.com",
+    "role": "Technician",
+    "department": "Maintenance",
+    "shift": "Morning",
+    "status": "Active"
+    
+  },
+  {
+    "name": "Grace Lee",
+    "email": "grace.lee@example.com",
+    "role": "Supervisor",
+    "department": "Logistics",
+    "shift": "Evening",
+    "status": "On Leave"
+   
+  },
+  {
+    "name": "Henry Adams",
+    "email": "henry.adams@example.com",
+    "role": "Operator",
+    "department": "Production",
+    "shift": "Night",
+    "status": "Active"
+    
+  },
+  {
+    "name": "Isabel Clark",
+    "email": "isabel.clark@example.com",
+    "role": "Manager",
+    "department": "IT",
+    "shift": "Morning",
+    "status": "Active"
+  
+  },
+  {
+    "name": "Jack Turner",
+    "email": "jack.turner@example.com",
+    "role": "Analyst",
+    "department": "Finance",
+    "shift": "Evening",
+    "status": "Inactive"
+  },
+  {
+    "name": "Karen Scott",
+    "email": "karen.scott@example.com",
+    "role": "Technician",
+    "department": "Operations",
+    "shift": "Morning",
+    "status": "Active"
+    
+  },
+  {
+    "name": "Leo Martin",
+    "email": "leo.martin@example.com",
+    "role": "Supervisor",
+    "department": "Logistics",
+    "shift": "Night",
+    "status": "Active"
+    
+  }
+]

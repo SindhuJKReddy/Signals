@@ -1,0 +1,65 @@
+<p-dialog header="Update Worker" [visible]="editDialogVisible()" (visibleChange)="editDialogVisible.set($event)"
+  [modal]="true" [closable]="true" [style]="{ width: '420px' }" (onHide)="cancel()">
+
+
+  <div class="p-fluid add-form" *ngIf="worker() as worker">
+
+   
+
+
+      <div class="p-field">
+        <label for="name">Name</label>
+        <input 
+        pInputText 
+        id="name" 
+        
+        [(ngModel)]="worker.name" />
+
+      </div>
+
+      <div class="p-field">
+        <label for="email">Email</label>
+        <input pInputText id="email" 
+         [(ngModel)]="worker.email" />
+      </div>
+
+      <div class="p-field">
+        <label for="role">Role</label>
+        <input pInputText id="role" 
+         type="number"
+          [(ngModel)]="worker.role" />
+      </div>
+
+      <div class="p-field">
+        <label for="department">Department</label>
+        <input pInputText id="department" 
+   [(ngModel)]="worker.department" />
+      </div>
+
+      <div class="p-field">
+        <label for="shift">Shift</label>
+        <input pInputText  id="shift" [(ngModel)]="worker.shift" />
+      </div>
+
+
+
+      <div class="p-field">
+        <label for="status">Status</label>
+        <select class="select"  [(ngModel)]="worker.status">
+          <option value="Active">Active</option>
+          <option value="Inactive">Inactive</option>
+          <option value="On Leave">On Leave</option>
+
+        </select>
+      </div>
+
+      <div class="buttons">
+        <button pButton type="button" label="Cancel" class="p-button-outlined" (click)="cancel()"></button>
+
+        <button pButton type="button" label="Update" class="p-button-primary" (click)="save()"></button>
+      </div>
+
+
+    
+  </div>
+</p-dialog>

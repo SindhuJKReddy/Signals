@@ -1,0 +1,49 @@
+<p-dialog header="Update Teacher"
+          [visible]="visible()"
+          (visibleChange)="visible.set($event)"
+          [modal]="true" [closable]="true"
+          [style]="{ width: '420px' }"
+          (onHide)="cancel()">
+
+  <div class="p-fluid add-form" *ngIf="selectedTeacherSignal() as teacher">
+    <div class="p-field">
+      <label for="name">Name</label>
+      <input pInputText id="name" [(ngModel)]="teacher.name" />
+    </div>
+
+    <div class="p-field">
+      <label for="email">Email</label>
+      <input pInputText id="email" [(ngModel)]="teacher.email" />
+    </div>
+
+    <div class="p-field">
+      <label for="subject">Subject</label>
+      <input pInputText id="subject" [(ngModel)]="teacher.subject" />
+    </div>
+
+    <div class="p-field">
+      <label for="department">Department</label>
+      <input pInputText id="department" [(ngModel)]="teacher.department" />
+    </div>
+
+    <div class="p-field">
+      <label for="experience">Experience</label>
+      <input pInputText id="experience" [(ngModel)]="teacher.experience" />
+    </div>
+
+    <div class="p-field">
+      <label for="status">Status</label>
+      <select [(ngModel)]="teacher.status">
+        <option value="Active">Active</option>
+        <option value="Inactive">Inactive</option>
+        <option value="Suspended">Suspended</option>
+        <option value="Graduated">Graduated</option>
+      </select>
+    </div>
+
+    <div class="buttons">
+      <button pButton type="button" label="Cancel" class="p-button-outlined" (click)="cancel()"></button>
+      <button pButton type="button" label="Update" class="p-button-primary" (click)="save()"></button>
+    </div>
+  </div>
+</p-dialog>

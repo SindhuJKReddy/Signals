@@ -1,0 +1,179 @@
+<div class="flex justify-between align-items-center mb-3">
+
+    <div class="header-section">
+        <h2>Student List</h2>
+
+        <!-- Export buttons -->
+  <button
+    pButton
+    label="Export CSV"
+    icon="pi pi-download"
+    class="p-button-success"
+    (click)="exportCSV()"
+  ></button>
+
+  <button
+    pButton
+    label="Export JSON"
+    icon="pi pi-download"
+    class="p-button-help"
+    (click)="exportJSON()"
+  ></button>
+
+
+        <button 
+           pButton 
+           type="button" 
+           label="Add Student" 
+           icon="pi pi-plus" 
+           class="add-button"
+           (click)="openAddStudent()">
+        </button>
+    </div>
+</div>
+
+
+<!-- toast -->
+<div class="card flex justify-center">
+    <p-toast [breakpoints]="{ '920px': { width: '100%', right: '0', left: '0' } }" />
+</div>
+
+
+
+<div class="card">
+    <p-table #dt 
+    [value]="students()" 
+    dataKey="id"
+    selectionMode="multiple"
+    [(selection)]="selectedStudents"
+    [paginator]="true" 
+    [totalRecords]="students().length"
+    [rows]="5"
+    [rowsPerPageOptions]="[5, 10, 20]"
+    [showCurrentPageReport]="true"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    paginatorTemplate="
+      CurrentPageReport
+      PageLinks
+      RowsPerPageDropdown"
+    
+    
+    [globalFilterFields]="['name', 'email']" 
+    [tableStyle]="{ 'min-width': '100vh' }">
+
+        <!-- 🔍 Global Search -->
+        <ng-template #caption>
+            <div class="filters">
+                <p-iconfield iconPosition="left">
+                    <p-inputicon>
+                        <i class="pi pi-search"></i>
+                    </p-inputicon>
+                    <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                        placeholder="Search students" class="global-search" />
+                </p-iconfield>
+
+                <p-select [options]="statusOptions" [(ngModel)]="selectedStatus" placeholder="All Status"
+                    optionLabel="label" optionValue="value" (onChange)="dt.filter($event.value, 'status', 'equals')"
+                    class="status-dropdown">
+                </p-select>
+
+                <p-select [options]="gradesOptions" [(ngModel)]="selectedGrade" placeholder="All Grades"
+                    optionLabel="label" optionValue="value" (onChange)="dt.filter($event.value, 'grade', 'equals')"
+                    class="grades-dropdown">
+                </p-select>
+            </div>
+
+           <div class="selection-bar"
+            *ngIf="selectedStudents.length > 0"
+           >
+        <span class="selected-count">
+            {{ selectedStudents.length }} student(s) selected
+        </span>
+ 
+        <button
+          pButton
+          label="Delete Selected"
+          icon="pi pi-trash"
+          class="p-button-danger"
+          (click)="deleteSelected()">
+        </button>
+      </div>
+
+        </ng-template>
+
+        <!-- 🧾 Table Header -->
+        <ng-template #header>
+            <tr>
+                <th style="width: 3rem; text-align: center;">
+                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                </th>
+                <th style="text-align: center;" pSortableColumn="id">
+                    Id <p-sortIcon field="id" />
+                </th>
+                <th style="text-align: center;"pSortableColumn="name">
+                    Name <p-sortIcon field="name" />
+                </th>
+                <th style="text-align: center;" pSortableColumn="email">
+                    Email <p-sortIcon field="email" />
+                </th>
+                <th style="text-align: center;"pSortableColumn="phone">
+                    Phone <p-sortIcon field="phone" />
+                </th>
+                <th style="text-align: center;" pSortableColumn="grade">
+                    Grade <p-sortIcon field="grade" />
+                </th>
+                <th style="text-align: center;" pSortableColumn="department">
+                    Department <p-sortIcon field="department" />
+                </th>
+                <th style="text-align: center;"pSortableColumn="enrollment">
+                    Enrollment <p-sortIcon field="enrollment" />
+                <th style="text-align: center;"pSortableColumn="status">
+                    Status <p-sortIcon field="status" />
+                </th>
+                <th style="text-align: center;"pSortableColumn="actions">
+                    Actions <p-sortIcon field="actions" />
+                </th>
+            </tr>
+        </ng-template>
+
+        <!-- 📄 Table Body -->
+        <ng-template #body let-student>
+            <tr >
+                <td >
+                 <p-tableCheckbox [value]="student"></p-tableCheckbox>
+                </td>
+                <td>{{ student.id }}</td>
+                <td>{{ student.name }}</td>
+                <td>{{ student.email }}</td>
+                <td>{{ student.phone }}</td>
+                <td>{{ student.grade }}</td>
+                <td>{{ student.department}}</td>
+                <td>{{ student.enrollment }}</td>
+                <td>
+                    <p-tag [value]="student.status" [severity]="getSeverity(student.status)">
+                    </p-tag>
+                </td>
+
+                <td class="actions-column">
+                    <button pButton icon="pi pi-pencil" class="p-button-text p-button-success"
+                        (click)="editStudent(student)"></button>
+
+                    <button pButton icon="pi pi-trash" class="p-button-text p-button-danger"
+                        (click)="onDelete(student)"></button>
+                </td>
+            </tr>
+        </ng-template>
+
+        <!-- 🚫 Empty Message -->
+        <ng-template #emptymessage>
+            <tr>
+                <td colspan="3">No students found</td>
+            </tr>
+        </ng-template>
+    </p-table>
+
+
+    <app-add-student></app-add-student>
+    <app-update-student></app-update-student>
+
+</div>

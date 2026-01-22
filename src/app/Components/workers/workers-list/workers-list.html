@@ -1,0 +1,129 @@
+<div class="flex justify-between align-items-center mb-3">
+  <div class="header-section">
+    <h2>Worker List</h2>
+
+    <!-- Export buttons -->
+    <button pButton label="Export CSV" icon="pi pi-download" class="p-button-success" (click)="exportCSV()">
+    </button>
+
+    <button pButton label="Export JSON" icon="pi pi-download" class="p-button-help" (click)="exportJSON()">
+    </button>
+
+    <button pButton type="button" label="Add Worker" icon="pi pi-plus" class="add-button" (click)="openAddWorker()">
+    </button>
+  </div>
+</div>
+
+<!-- toast -->
+<div class="card flex justify-center">
+  <p-toast [breakpoints]="{ '920px': { width: '100%', right: '0', left: '0' } }" />
+</div>
+
+<div class="card">
+  <p-table #dt [value]="workers()" dataKey="email" selectionMode="multiple" [(selection)]="selectedWorkers"
+    [paginator]="true" [rows]="5" [rowsPerPageOptions]="[5, 10, 20]" 
+    [showCurrentPageReport]="true"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    paginatorTemplate="
+      CurrentPageReport
+      PageLinks
+      RowsPerPageDropdown"
+      [globalFilterFields]="['name', 'email', 'role', 'department']"
+    [tableStyle]="{ 'min-width': '100vh' }">
+
+    <!--  Search + Filters + Selection bar -->
+    <ng-template #caption>
+      <div class="filters">
+        <p-iconfield iconPosition="left">
+          <p-inputicon>
+            <i class="pi pi-search"></i>
+          </p-inputicon>
+          <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
+            placeholder="Search workers" class="global-search" />
+        </p-iconfield>
+
+        <p-select [options]="shiftOptions" [(ngModel)]="selectedShift" placeholder="All Shifts" optionLabel="label"
+          optionValue="value" (onChange)="dt.filter($event.value, 'shift', 'equals')">
+        </p-select>
+
+        <p-select [options]="statusOptions" [(ngModel)]="selectedStatus" placeholder="All Status" optionLabel="label"
+          optionValue="value" (onChange)="dt.filter($event.value, 'status', 'equals')">
+        </p-select>
+      </div>
+
+      <div class="selection-bar" *ngIf="selectedWorkers.length > 0">
+        <span class="selected-count">
+          {{ selectedWorkers.length }} worker(s) selected
+        </span>
+
+        <button pButton label="Delete Selected" icon="pi pi-trash" class="p-button-danger" (click)="deleteSelected()">
+        </button>
+      </div>
+    </ng-template>
+
+    <!--  Table Header -->
+    <ng-template #header>
+      <tr>
+        <th style="width: 3rem; text-align: center;">
+          <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+        </th>
+        <th style="text-align: center" pSortableColumn="name">Name <p-sortIcon field="name" /></th>
+        <th style="text-align: center" pSortableColumn="email">Email <p-sortIcon field="email" /></th>
+        <th style="text-align: center" pSortableColumn="role">Role <p-sortIcon field="role" /></th>
+        <th style="text-align: center"pSortableColumn="department">Department <p-sortIcon field="department" /></th>
+        <th style="text-align: center" pSortableColumn="shift">Shifts <p-sortIcon field="shift" /></th>
+        <th pSortableColumn="status">Status <p-sortIcon field="status" /></th>
+        <th style="text-align: center;" pSortableColumn="actions">
+          Actions <p-sortIcon field="actions" />
+        </th>
+      </tr>
+    </ng-template>
+
+    <!-- Table Body -->
+    <ng-template #body let-worker>
+      <tr>
+        
+
+        <td>
+          <p-tableCheckbox [value]="worker"></p-tableCheckbox>
+        </td>
+        <td>{{ worker.name }}</td>
+        <td>{{ worker.email }}</td>
+        <td>{{ worker.role }}</td>
+        <td>{{ worker.department }}</td>
+        
+
+        <td>
+          <p-tag [value]="worker.shift" [severity]="getShiftSeverity(worker.shift)">
+          </p-tag>
+        </td>
+
+        <td>
+          <p-tag [value]="worker.status" [severity]="getSeverity(worker.status)">
+          </p-tag>
+        </td>
+        <td class="actions-column">
+          <button pButton type="button" icon="pi pi-pencil" class="p-button-rounded p-button-text"
+            (click)="editWorker(worker)">
+          </button>
+
+          <button pButton type="button" icon="pi pi-trash" class="p-button-rounded p-button-text p-button-danger"
+            (click)="onDelete(worker)">
+          </button>
+
+        </td>
+      </tr>
+    </ng-template>
+
+    <!-- 🚫 Empty -->
+    <ng-template #emptymessage>
+      <tr>
+        <td colspan="8">No workers found</td>
+      </tr>
+    </ng-template>
+
+  </p-table>
+
+  <app-add-workers></app-add-workers>
+  <app-update-workers></app-update-workers>
+</div>

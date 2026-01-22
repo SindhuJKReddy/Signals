@@ -1,0 +1,137 @@
+[
+  {
+    "name": "Anita Sharma",
+    "email": "anita.sharma@school.com",
+    "subject": "Mathematics",
+    "department": "Science",
+    "experience": 8,
+    "status": "Active",
+    "actions": ""
+  },
+  {
+    "name": "Rahul Verma",
+    "email": "rahul.verma@school.com",
+    "subject": "Physics",
+    "department": "Science",
+    "experience": 12,
+    "status": "Active",
+    "actions": ""
+  },
+  {
+    "name": "Sneha Iyer",
+    "email": "sneha.iyer@school.com",
+    "subject": "Chemistry",
+    "department": "Science",
+    "experience": 6,
+    "status": "Inactive",
+    "actions": ""
+  },
+  {
+    "name": "Amit Patel",
+    "email": "amit.patel@school.com",
+    "subject": "Biology",
+    "department": "Science",
+    "experience": 10,
+    "status": "Active",
+    "actions": ""
+  },
+  {
+    "name": "Neha Kapoor",
+    "email": "neha.kapoor@school.com",
+    "subject": "English",
+    "department": "Arts",
+    "experience": 7,
+    "status": "Active",
+    "actions": ""
+  },
+  {
+    "name": "Vikram Singh",
+    "email": "vikram.singh@school.com",
+    "subject": "History",
+    "department": "Arts",
+    "experience": 14,
+    "status": "Active",
+    "actions": ""
+  },
+  {
+    "name": "Pooja Mehta",
+    "email": "pooja.mehta@school.com",
+    "subject": "Geography",
+    "department": "Arts",
+    "experience": 5,
+    "status": "Inactive",
+    "actions": ""
+  },
+  {
+    "name": "Suresh Nair",
+    "email": "suresh.nair@school.com",
+    "subject": "Computer Science",
+    "department": "Technology",
+    "experience": 11,
+    "status": "Active",
+    "actions": ""
+  },
+  {
+    "name": "Kavita Rao",
+    "email": "kavita.rao@school.com",
+    "subject": "Information Technology",
+    "department": "Technology",
+    "experience": 9,
+    "status": "Active",
+    "actions": ""
+  },
+  {
+    "name": "Arjun Malhotra",
+    "email": "arjun.malhotra@school.com",
+    "subject": "Economics",
+    "department": "Commerce",
+    "experience": 13,
+    "status": "Active",
+    "actions": ""
+  },
+  {
+    "name": "Ritu Jain",
+    "email": "ritu.jain@school.com",
+    "subject": "Accounting",
+    "department": "Commerce",
+    "experience": 6,
+    "status": "Inactive",
+    "actions": ""
+  },
+  {
+    "name": "Manish Gupta",
+    "email": "manish.gupta@school.com",
+    "subject": "Business Studies",
+    "department": "Commerce",
+    "experience": 15,
+    "status": "Active",
+    "actions": ""
+  },
+  {
+    "name": "Priya Kulkarni",
+    "email": "priya.kulkarni@school.com",
+    "subject": "Hindi",
+    "department": "Languages",
+    "experience": 8,
+    "status": "Active",
+    "actions": ""
+  },
+  {
+    "name": "Rohan Das",
+    "email": "rohan.das@school.com",
+    "subject": "Sanskrit",
+    "department": "Languages",
+    "experience": 4,
+    "status": "Inactive",
+    "actions": ""
+  },
+  {
+    "name": "Meera Banerjee",
+    "email": "meera.banerjee@school.com",
+    "subject": "Political Science",
+    "department": "Social Studies",
+    "experience": 9,
+    "status": "Active",
+    "actions": ""
+  }
+]

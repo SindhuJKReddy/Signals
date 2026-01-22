@@ -1,0 +1,102 @@
+[
+  {
+    "id": 1,
+    "name": "Aarav Sharma",
+    "email": "aarav.sharma@student.com",
+    "phone": "9876543210",
+    "grade": "11th",
+    "department": "Commerce",
+    "enrollment": "2023-01-15",
+    "status": "Active"
+  },
+  {
+    "id": 2,
+    "name": "Diya Patel",
+    "email": "diya.patel@student.com",
+    "phone": "9123456789",
+    "grade": "10th",
+    "department": "Science",
+    "enrollment": "2022-03-01",
+    "status": "Active"
+  },
+  {
+    "id": 3,
+    "name": "Rohan Mehta",
+    "email": "rohan.mehta@student.com",
+    "phone": "9988776655",
+    "grade": "12th",
+    "department": "Science",
+    "enrollment": "2021-02-10",
+    "status": "Inactive"
+  },
+  {
+    "id": 4,
+    "name": "Sneha Iyer",
+    "email": "sneha.iyer@student.com",
+    "phone": "9012345678",
+    "grade": "10th",
+    "department": "Arts",
+    "enrollment": "2023-04-20",
+    "status": "Active"
+  },
+  {
+    "id": 5,
+    "name": "Karthik Rao",
+    "email": "karthik.rao@student.com",
+    "phone": "9090909090",
+    "grade": "11th",
+    "department": "Arts",
+    "enrollment": "2022-05-30",
+    "status": "Suspended"
+  },
+  {
+    "id": 6,
+    "name": "Pooja Nair",
+    "email": "pooja.nair@student.com",
+    "phone": "9887766554",
+    "grade": "10th",
+    "department": "Arts",
+    "enrollment": "2023-06-05",
+    "status": "Active"
+  },
+  {
+    "id": 7,
+    "name": "Vikram Singh",
+    "email": "vikram.singh@student.com",
+    "phone": "9765432109",
+    "grade": "12th",
+    "department": "Technology",
+    "enrollment": "2021-03-12",
+    "status": "Inactive"
+  },
+  {
+    "id": 8,
+    "name": "Ananya Gupta",
+    "email": "ananya.gupta@student.com",
+    "phone": "9654321789",
+    "grade": "10th",
+    "department": "Commerce",
+    "enrollment": "2022-02-18",
+    "status": "Active"
+  },
+  {
+    "id": 9,
+    "name": "Rahul Das",
+    "email": "rahul.das@student.com",
+    "phone": "9345678210",
+    "grade": "10th",
+    "department": "Languages",
+    "enrollment": "2020-06-25",
+    "status": "Graduated"
+  },
+  {
+    "id": 10,
+    "name": "Neha Kulkarni",
+    "email": "neha.kulkarni@student.com",
+    "phone": "9871203456",
+    "grade": "11th",
+    "department": "Social Studies",
+    "enrollment": "2023-03-14",
+    "status": "Active"
+  }
+]

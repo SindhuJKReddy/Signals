@@ -1,0 +1,80 @@
+* {
+    margin: 0;
+    padding: 0;
+   
+}
+html, body {
+    height: 100%;
+}
+.main-content {
+    flex-grow: 1;
+    padding: 2rem;
+    overflow-y: auto;
+}
+.container {
+    display: flex;
+    height: 100vh;
+     background: var(--app-bg);
+}
+
+.title {
+    font-size: 1.2rem;
+    text-align: center;
+    margin: 1rem;
+    
+}
+
+a {
+    text-decoration: none;
+    display: flex;
+    color: black;
+    margin-left: 60px;
+    padding: 0.75rem;
+    border-radius: 6px;
+    margin-right: 10px;
+}
+
+a:hover {
+    background: lightgray;
+}
+
+.sidebar {
+   background-color: var(--sidebar-bg);
+   color: var(--sidebar-text);
+   border-right: 1px solid var(--sidebar-border);
+   width: 300px;
+   background: #ffffff;
+   height: 100vh;
+   position: sticky;
+}
+
+.sidebar a {
+    margin-bottom: 1rem;
+    color: var(--sidebar-text);
+}
+
+i {
+    margin-right: 10px;
+}
+a.active {
+    background: #e0e7ff;
+    color:  #1976d2;
+}
+
+.theme-toggle {
+    cursor: pointer;
+    padding: 17px;
+    margin-top: 500px;
+    margin-left: 25px;
+    /* border-radius: 8px; */
+   transition: transform 0.2s ease, box-shadow 0.2s ease;
+   border-top: 1px solid grey;
+   
+}
+
+
+.theme-toggle:hover {
+    transform: translateY(-2px);
+    /* background: #d1d5db; */
+    
+}

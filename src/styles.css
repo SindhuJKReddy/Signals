@@ -1,0 +1,96 @@
+@import "primeicons/primeicons.css";
+
+* {
+    padding: 0;
+    margin: 0;
+}
+.container {
+    display: flex;
+    gap: 1rem;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+p-chart {
+  display: block;
+  width: 100%;
+}
+
+.card p-chart {
+  height: 300px;
+}
+
+.card p-chart {
+  height: 320px;
+}
+
+@media (max-width: 600px) {
+  .card canvas {
+    height: 260px !important;
+  }
+}
+
+
+
+
+
+/* Themes */
+:root {
+  --app-bg: var(--p-gray-50);
+  --card-bg: #ffffff;
+
+  --text-primary: var(--p-gray-800);
+  --text-secondary: var(--p-gray-500);
+
+  --border-color: var(--p-gray-200);
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.05);
+
+   --p-text-color: #374151; /* dark gray for light mode */
+   --dashboard-text-color: #374151;
+
+   /* Footer */
+   --footer-bg: #ffffff;
+   --footer-text-color: black;
+   --footer-h4-color: black;
+   
+
+   /* for graph axes */
+   --chart-text-color: #374151;      /* dark text for light mode */
+  --chart-grid-color: #e5e7eb;      /* light grid for light mode */
+  --chart-line-color: #3b82f6;      /* primary line color */
+
+  
+}
+
+body.dark-theme {
+  --app-bg: var(--p-gray-900);
+  --card-bg: var(--p-gray-800);
+
+  --text-primary: var(--p-gray-100);
+  --text-secondary: var(--p-gray-400);
+
+  --border-color: var(--p-gray-700);
+  --shadow-sm: 0 8px 20px rgba(0, 0, 0, 0.35);
+
+  --p-text-color: #ffffff; /* white in dark mode */
+
+  --dashboard-text-color: #ffffff; 
+
+  /* Footer */
+  --footer-bg: var(--p-gray-800);
+  --footer-text-color: #ffffff;
+  --footer-h4-color: #ffffff;
+
+     /* for graph axes but not working*/ 
+
+  --chart-text-color: #f9fafb;      /* white text for dark mode */
+  --chart-grid-color: #475569;      /* darker grid for dark mode */
+  --chart-line-color: #60a5fa;      /* brighter primary for dark mode */
+
+   
+
+  
+}
+p {
+  color: var(--p-text-color);
+}

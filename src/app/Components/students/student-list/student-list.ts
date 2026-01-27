@@ -42,8 +42,12 @@ import { Select } from 'primeng/select';
 export class StudentList {
 
   constructor(private studentService: StudentService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    
   ) { }
+
+  
+
 
   // ✅ Expose signal to template
   get students() {
@@ -157,7 +161,6 @@ export class StudentList {
 
   selectedStudents: Student[] = [];
 
-
   deleteSelected() {
     if (confirm('Are you sure you want to delete?')) 
     if (!this.selectedStudents.length) return;
@@ -175,9 +178,6 @@ export class StudentList {
 
     this.selectedStudents = [];
   }
-
-  
-
 }
 
 

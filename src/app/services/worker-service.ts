@@ -22,6 +22,8 @@ export class WorkerService {
   private workersSignal = signal<Worker[]>([]);
   worker = this.workersSignal.asReadonly();
 
+  previousWorkerCount = signal<number>(0);
+
   private http = inject(HttpClient);
 
   selectedWorkersEmail = signal<string | null>(null);
@@ -40,6 +42,7 @@ export class WorkerService {
     this.http
       .get<Worker[]>('Data/workers.json')
       .subscribe(data => {
+        this.previousWorkerCount.set(this.workersSignal().length);
         this.workersSignal.set(data);
       });
   }

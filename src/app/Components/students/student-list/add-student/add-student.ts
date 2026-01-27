@@ -54,16 +54,11 @@ export class AddStudent {
       status: 'Active'
     };
 
-    
-
     this.studentService.addStudent(student);
   }
 
-
-
 cancel() {
   this.studentService.closeAddDialog();
-
 }
 
 save() {

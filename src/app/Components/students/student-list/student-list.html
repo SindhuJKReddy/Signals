@@ -4,30 +4,14 @@
         <h2>Student List</h2>
 
         <!-- Export buttons -->
-  <button
-    pButton
-    label="Export CSV"
-    icon="pi pi-download"
-    class="p-button-success"
-    (click)="exportCSV()"
-  ></button>
+        <button pButton label="Export CSV" icon="pi pi-download" class="p-button-success"
+            (click)="exportCSV()"></button>
 
-  <button
-    pButton
-    label="Export JSON"
-    icon="pi pi-download"
-    class="p-button-help"
-    (click)="exportJSON()"
-  ></button>
+        <button pButton label="Export JSON" icon="pi pi-download" class="p-button-help" (click)="exportJSON()"></button>
 
 
-        <button 
-           pButton 
-           type="button" 
-           label="Add Student" 
-           icon="pi pi-plus" 
-           class="add-button"
-           (click)="openAddStudent()">
+        <button pButton type="button" label="Add Student" icon="pi pi-plus" class="add-button"
+            (click)="openAddStudent()">
         </button>
     </div>
 </div>
@@ -40,26 +24,11 @@
 
 
 
-<div class="card">
-    <p-table #dt 
-    [value]="students()" 
-    dataKey="id"
-    selectionMode="multiple"
-    [(selection)]="selectedStudents"
-    [paginator]="true" 
-    [totalRecords]="students().length"
-    [rows]="5"
-    [rowsPerPageOptions]="[5, 10, 20]"
-    [showCurrentPageReport]="true"
-    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-    paginatorTemplate="
-      CurrentPageReport
-      PageLinks
-      RowsPerPageDropdown"
-    
-    
-    [globalFilterFields]="['name', 'email']" 
-    [tableStyle]="{ 'min-width': '100vh' }">
+<div class="card p-datatable">
+    <p-table #dt [value]="students()" [scrollable]="true" scrollHeight="calc(100vh - 120px)" [virtualScroll]="true"
+        [virtualScrollItemSize]="48" dataKey="id" selectionMode="multiple" [(selection)]="selectedStudents"
+        [totalRecords]="students().length" [globalFilterFields]="['name', 'email']"
+        [tableStyle]="{ 'min-width': '100%' }">
 
         <!-- 🔍 Global Search -->
         <ng-template #caption>
@@ -72,8 +41,13 @@
                         placeholder="Search students" class="global-search" />
                 </p-iconfield>
 
-                <p-select [options]="statusOptions" [(ngModel)]="selectedStatus" placeholder="All Status"
-                    optionLabel="label" optionValue="value" (onChange)="dt.filter($event.value, 'status', 'equals')"
+                <p-select 
+                [options]="statusOptions" 
+                [(ngModel)]="selectedStatus" 
+                placeholder="All Status"
+                    optionLabel="label" 
+                    optionValue="value" 
+                    (onChange)="dt.filter($event.value, 'status', 'equals')"
                     class="status-dropdown">
                 </p-select>
 
@@ -83,21 +57,15 @@
                 </p-select>
             </div>
 
-           <div class="selection-bar"
-            *ngIf="selectedStudents.length > 0"
-           >
-        <span class="selected-count">
-            {{ selectedStudents.length }} student(s) selected
-        </span>
- 
-        <button
-          pButton
-          label="Delete Selected"
-          icon="pi pi-trash"
-          class="p-button-danger"
-          (click)="deleteSelected()">
-        </button>
-      </div>
+            <div class="selection-bar" *ngIf="selectedStudents.length > 0">
+                <span class="selected-count">
+                    {{ selectedStudents.length }} student(s) selected
+                </span>
+
+                <button pButton label="Delete Selected" icon="pi pi-trash" class="p-button-danger"
+                    (click)="deleteSelected()">
+                </button>
+            </div>
 
         </ng-template>
 
@@ -110,13 +78,13 @@
                 <th style="text-align: center;" pSortableColumn="id">
                     Id <p-sortIcon field="id" />
                 </th>
-                <th style="text-align: center;"pSortableColumn="name">
+                <th style="text-align: center;" pSortableColumn="name">
                     Name <p-sortIcon field="name" />
                 </th>
                 <th style="text-align: center;" pSortableColumn="email">
                     Email <p-sortIcon field="email" />
                 </th>
-                <th style="text-align: center;"pSortableColumn="phone">
+                <th style="text-align: center;" pSortableColumn="phone">
                     Phone <p-sortIcon field="phone" />
                 </th>
                 <th style="text-align: center;" pSortableColumn="grade">
@@ -125,12 +93,12 @@
                 <th style="text-align: center;" pSortableColumn="department">
                     Department <p-sortIcon field="department" />
                 </th>
-                <th style="text-align: center;"pSortableColumn="enrollment">
+                <th style="text-align: center;" pSortableColumn="enrollment">
                     Enrollment <p-sortIcon field="enrollment" />
-                <th style="text-align: center;"pSortableColumn="status">
+                <th style="text-align: center;" pSortableColumn="status">
                     Status <p-sortIcon field="status" />
                 </th>
-                <th style="text-align: center;"pSortableColumn="actions">
+                <th style="text-align: center;" pSortableColumn="actions">
                     Actions <p-sortIcon field="actions" />
                 </th>
             </tr>
@@ -138,9 +106,9 @@
 
         <!-- 📄 Table Body -->
         <ng-template #body let-student>
-            <tr >
-                <td >
-                 <p-tableCheckbox [value]="student"></p-tableCheckbox>
+            <tr>
+                <td>
+                    <p-tableCheckbox [value]="student"></p-tableCheckbox>
                 </td>
                 <td>{{ student.id }}</td>
                 <td>{{ student.name }}</td>

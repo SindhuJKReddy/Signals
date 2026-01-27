@@ -7,7 +7,8 @@
 .add-form {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    background: #fff;
+    background: var(--dialog-bg);
+  color: var(--dialog-text);
     padding: 0.5rem;
 }
  
@@ -40,7 +41,9 @@ button {
  
 .select {
     padding: 0.4rem;
-    border: 1px solid lightgrey;
+    background: var(--input-bg);
+    color: var(--dialog-text);
+  /* border: 1px solid var(--dialog-border); */
     border-radius: 5px;
     min-width: 250px;
 }
@@ -81,11 +84,13 @@ button {
 }
  
 .btn-cancel {
-    background-color: white;
+    background-color: var(--button-cancel-bg);
+  color: var(--dialog-text);
+  border: 1px solid var(--dialog-border);
 }
  
 .btn-cancel:hover {
-    background-color: #f5f6f8;
+    background-color: var(--button-cancel-hover);
 }
  
 /* Make address take full row */

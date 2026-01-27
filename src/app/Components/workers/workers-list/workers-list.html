@@ -20,16 +20,16 @@
 </div>
 
 <div class="card">
-  <p-table #dt [value]="workers()" dataKey="email" selectionMode="multiple" [(selection)]="selectedWorkers"
-    [paginator]="true" [rows]="5" [rowsPerPageOptions]="[5, 10, 20]" 
-    [showCurrentPageReport]="true"
-    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-    paginatorTemplate="
-      CurrentPageReport
-      PageLinks
-      RowsPerPageDropdown"
-      [globalFilterFields]="['name', 'email', 'role', 'department']"
-    [tableStyle]="{ 'min-width': '100vh' }">
+  <p-table #dt [value]="workers()" 
+  [scrollable]="true"
+  scrollHeight="100vh"
+  [virtualScroll]="true"
+  [virtualScrollItemSize]="48"
+  dataKey="email" 
+  selectionMode="multiple" 
+  [(selection)]="selectedWorkers"    
+  [globalFilterFields]="['name', 'email', 'role', 'department']"
+  [tableStyle]="{ 'min-width': '100vh' }">
 
     <!--  Search + Filters + Selection bar -->
     <ng-template #caption>
@@ -42,12 +42,24 @@
             placeholder="Search workers" class="global-search" />
         </p-iconfield>
 
-        <p-select [options]="shiftOptions" [(ngModel)]="selectedShift" placeholder="All Shifts" optionLabel="label"
-          optionValue="value" (onChange)="dt.filter($event.value, 'shift', 'equals')">
+        <p-select 
+        class="shift-dropdown"
+           [options]="shiftOptions" 
+           [(ngModel)]="selectedShift" 
+           placeholder="All Shifts" 
+           optionLabel="label"
+          optionValue="value" 
+          (onChange)="dt.filter($event.value, 'shift', 'equals')">
         </p-select>
 
-        <p-select [options]="statusOptions" [(ngModel)]="selectedStatus" placeholder="All Status" optionLabel="label"
-          optionValue="value" (onChange)="dt.filter($event.value, 'status', 'equals')">
+        <p-select 
+        class="status-dropdown"
+           [options]="statusOptions" 
+           [(ngModel)]="selectedStatus" 
+           placeholder="All Status" 
+           optionLabel="label"
+          optionValue="value" 
+          (onChange)="dt.filter($event.value, 'status', 'equals')">
         </p-select>
       </div>
 

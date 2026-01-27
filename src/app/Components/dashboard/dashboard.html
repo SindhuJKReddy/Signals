@@ -5,19 +5,14 @@
 
     <div class="card">
 
-        <span 
-        class="trend" 
-        [class.positive]="studentGrowth() > 0" 
-        [class.negative]="studentGrowth() < 0">
+        <div class="trend" [class.up]="studentGrowthPercent() > 0" [class.down]="studentGrowthPercent() < 0">
 
-            <i class="pi" 
-               [class.pi-arrow-up]="studentGrowth() > 0" 
-               [class.pi-arrow-down]="studentGrowth() < 0">
+            <i class="pi" *ngIf="studentGrowthPercent() !== 0"
+                [ngClass]="studentGrowthPercent() > 0 ? 'pi-arrow-up' : 'pi-arrow-down'">
             </i>
-            {{ studentGrowth() }}%
 
-        </span>
-
+            <span>{{ studentGrowthPercent() }}%</span>
+        </div>
         <div class="card-icon blue">
             <i class="pi pi-graduation-cap"></i>
         </div>
@@ -31,9 +26,13 @@
 
     <div class="card">
 
-        <span class="trend positive">
-            <i class="pi pi-arrow-up"></i> +5%
-        </span>
+        <div class="trend"
+                    [class.up]="teacherSharePercent() > 0"
+                    [class.down]="teacherSharePercent() < 0">
+ 
+                    <i class="pi pi-arrow-up"></i>
+                    <span>{{ teacherSharePercent() }}%</span>
+                </div>
 
         <div class="card-icon green">
             <i class="pi pi-user"></i>
@@ -48,9 +47,13 @@
 
     <div class="card">
 
-        <span class="trend positive">
-            <i class="pi pi-arrow-up"></i> +3%
-        </span>
+        <div class="trend"
+                    [class.up]="workerSharePercent() > 0"
+                    [class.down]="workerSharePercent() < 0">
+ 
+                    <i class="pi pi-arrow-up"></i>
+                    <span>{{ workerSharePercent() }}%</span>
+                </div>
 
         <div class="card-icon purple">
             <i class="pi pi-briefcase"></i>
@@ -111,7 +114,7 @@
 <div class="footer">
     <h3>Quick Stats Summary</h3>
     <div class="quick-stats">
-        
+
         <div class="stat blue">
 
 

@@ -5,12 +5,14 @@ import { WorkerService } from '../../services/worker-service';
 import { computed } from '@angular/core';
 import { ChartModule } from 'primeng/chart';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-dashboard',
   imports: [
     ChartModule,
-    FormsModule
+    FormsModule,
+    CommonModule
   ],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
@@ -25,6 +27,26 @@ export class Dashboard {
   ) { }
 
   // Summary Cards using signals
+  studentGrowthPercent = computed(() => {
+    const students = this.studentService.students();
+    if (students.length === 0) return 0;
+ 
+    const currentYear = new Date().getFullYear();
+    const lastYear = currentYear - 1;
+ 
+    const currentCount = students.filter(s => new Date(s.enrollment).getFullYear() === currentYear).length;
+    const previousCount = students.filter(s => new Date(s.enrollment).getFullYear() === lastYear).length;
+ 
+    if (currentCount === 0 && previousCount > 0) {
+      return Math.round(((currentCount - previousCount) / previousCount) * 100);
+    }
+ 
+    if (previousCount === 0)
+      return currentCount > 0 ? 100 : 0;
+ 
+    return Math.round(((currentCount - previousCount) / previousCount) * 100);
+  });
+  
   totalStudents = computed(() => this.studentService.students().length);
 
   activeStudents = computed(() =>
@@ -37,8 +59,20 @@ export class Dashboard {
 
   totalTeachers = computed(() => this.teacherService.teachers().length);
 
+  totalStaff = computed(() => this.totalTeachers() + this.totalWorkers())
+  
+  teacherSharePercent = computed(() => {
+    const staff = this.totalStaff();
+    return staff === 0 ? 0 : Math.round((this.totalTeachers() / staff) * 100);
+  });
+
   totalWorkers = computed(() => this.workerService.worker().length);
 
+   workerSharePercent = computed(() => {
+    const staff = this.totalStaff();
+    return staff === 0 ? 0 : Math.round((this.totalWorkers() / staff) * 100);
+  });
+  
   academicYear = '2025–2026';
   currentSemester = 'Spring';
 
@@ -77,22 +111,36 @@ export class Dashboard {
 
   // Chart Options tells the chart how to behave; responsive: true makes it adapt to screen size; legend is a small box on the top of the chart which tells what each color represents
   chartOptions = {
-    responsive: true,
-    plugins: {
-      legend: {
-        display: true,
+  responsive: true,
+  plugins: {
+    legend: {
+      display: true,
+      color: '#e5e7eb'
+    }
+  },
+  scales: {
+    x: {
+      ticks: {
+        color: '#e5e7eb'
+      },
+      grid: {
+        color: '#e5e7eb'
       }
     },
-    scales: {
-      y: {
-        max: 10,
-        beginAtZero: true,
-        ticks: {
-      stepSize: 1
-    }
+    y: {
+      max: 500,
+      beginAtZero: true,
+      ticks: {
+        stepSize: 20,
+        color: '#e5e7eb'
+      },
+      grid: {
+        color: '#e5e7eb'
       }
     }
-  };
+  }
+};
+
 
   // BAR CHART DATA- students by grade
   studentsByGradeData = computed(() => {
@@ -121,21 +169,28 @@ export class Dashboard {
     maintainAspectRatio: false,
     plugins: {
       legend: {
-        display: true
+        display: true,
+        color: '#e5e7eb'
       },
 
     },
     scales: {
       x: {
         grid: {
-          display: false
+          display: true,
+          color: '#e5e7eb'
         }
       },
       y: {
-        max: 50,
+        max: 500,
         beginAtZero: true,
         ticks: {
-          stepSize: 10
+          stepSize: 50,
+          color: '#e5e7eb',
+        },
+        grid: {
+          drawBorder: false,
+          color: '#e5e7eb'
         }
       }
     }
@@ -163,7 +218,8 @@ export class Dashboard {
 
   studentStatusOptions = {
     plugins: {
-      legend: {     
+      legend: {    
+        color: '#e5e7eb',
         labels: {
           usePointStyle: true,
           color: 'Grey',
@@ -211,12 +267,13 @@ export class Dashboard {
   };
 });
 
-            departmentOptions = {
+departmentOptions = {
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
       legend: {
         position: 'top',
+        color: '#e5e7eb',
         labels: {
           color: '#334155',
           font: {
@@ -248,11 +305,11 @@ export class Dashboard {
       },
       y: {
         min: 0,
-        max: 10,
+        max: 500,
         beginAtZero: true,
         ticks: {
           color: '#64748b',
-          stepSize: 2
+          stepSize: 50
         },
         grid: {
           drawBorder: false,
@@ -307,6 +364,4 @@ workerToTeacherRatio = computed(() => {
 
   return `${staffRatio}:${teacherRatio}`;
 });
-
-
 }

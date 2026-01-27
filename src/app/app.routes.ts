@@ -5,6 +5,7 @@ import { WorkersList } from './Components/workers/workers-list/workers-list';
 import { Dashboard } from './Components/dashboard/dashboard';
 
 export const routes: Routes = [
+      { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
       { path: 'student-list', component: StudentList },
       { path: 'teachers-list', component: TeachersList },
       { path: 'workers-list', component: WorkersList },

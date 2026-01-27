@@ -4,6 +4,9 @@
     padding: 0;
     margin: 0;
 }
+h2 {
+    color: var(--h2-color);
+}
 .container {
     display: flex;
     gap: 1rem;
@@ -11,10 +14,10 @@
     margin-bottom: 10px;
 }
 
-p-chart {
+/* p-chart {
   display: block;
   width: 100%;
-}
+} */
 
 .card p-chart {
   height: 300px;
@@ -36,7 +39,9 @@ p-chart {
 
 /* Themes */
 :root {
+  color-scheme: light;  /* this is, so that the browser open in light mode as soon as we open it*/
   --app-bg: var(--p-gray-50);
+ --table-bg: #ffffff;
   --card-bg: #ffffff;
 
   --text-primary: var(--p-gray-800);
@@ -47,50 +52,104 @@ p-chart {
 
    --p-text-color: #374151; /* dark gray for light mode */
    --dashboard-text-color: #374151;
+   --h2-color: black;
 
    /* Footer */
-   --footer-bg: #ffffff;
    --footer-text-color: black;
    --footer-h4-color: black;
    
+  
+  --tr-color: #ffffff;
+  --td-color: black;
+  --search-color: black;
+  --th-background-color: #ffffff;
+  --table-background-color: #ffffff;
 
-   /* for graph axes */
-   --chart-text-color: #374151;      /* dark text for light mode */
-  --chart-grid-color: #e5e7eb;      /* light grid for light mode */
-  --chart-line-color: #3b82f6;      /* primary line color */
+  --sidebar-bg: #f3f4f6;
+  --router-link-color: black;
+ --theme-toggle-color: black;
+
+  --table-header-bg: #ffffff;
+
+   /* Light mode hover (matches your screenshot) */
+  --table-hover-bg: #f3f6fb;
+
+  /* Light mode hover text */
+  --table-hover-text: #111827;
+
+  /* dialog */
+  --dialog-bg: #ffffff;
+  --dialog-text: #111827;
+  /* --dialog-border: #e5e7eb; */
+  --input-bg: #ffffff;
+  --button-cancel-bg: #ffffff;
+  --button-cancel-hover: #f5f6f8;
+  --summary-card-bg: #ffffff;
+
+  
 
   
 }
 
 body.dark-theme {
   --app-bg: var(--p-gray-900);
+  --table-bg: var(--p-gray-800);
   --card-bg: var(--p-gray-800);
-
   --text-primary: var(--p-gray-100);
   --text-secondary: var(--p-gray-400);
-
   --border-color: var(--p-gray-700);
   --shadow-sm: 0 8px 20px rgba(0, 0, 0, 0.35);
-
   --p-text-color: #ffffff; /* white in dark mode */
-
   --dashboard-text-color: #ffffff; 
+  --h2-color: white;
 
   /* Footer */
-  --footer-bg: var(--p-gray-800);
   --footer-text-color: #ffffff;
   --footer-h4-color: #ffffff;
+   --tr-color: var(--p-gray-900);
+   --td-color: #ffffff;
+   --th-background-color: rgb(33, 31, 31);
+   --th-color: #ffffff;
+   --search-color: #ffffff;
+   --table-background-color: black;
+    --sidebar-bg: #020617;
+    --router-link-color: #ffffff;
+    --theme-toggle-color: #ffffff;
 
-     /* for graph axes but not working*/ 
+     --table-header-bg: var(--p-gray-800);
 
-  --chart-text-color: #f9fafb;      /* white text for dark mode */
-  --chart-grid-color: #475569;      /* darker grid for dark mode */
-  --chart-line-color: #60a5fa;      /* brighter primary for dark mode */
+      /* Dark mode hover */
+  --table-hover-bg: #2a2a2a;
 
-   
+  /* Dark mode hover text */
+  --table-hover-text: #9ca3af;
 
-  
+  --dialog-bg: #020617;
+  --dialog-text: #e5e7eb;
+  /* --dialog-border: #1e293b; */
+  --input-bg: #020617;
+  --button-cancel-bg: #020617;
+  --button-cancel-hover: #0b1220;
+
+  --summary-card-bg: var(--p-gray-800);
 }
+
 p {
   color: var(--p-text-color);
 }
+.p-datatable .p-datatable-header {
+  background: var(--table-header-bg) !important;
+  border: none;
+}
+.p-dialog .p-dialog-header,
+.p-dialog .p-dialog-content,
+.p-dialog .p-dialog-footer {
+  background: var(--dialog-bg);
+  color: var(--dialog-text);
+  /* border-color: var(--dialog-border); */
+}
+
+
+
+
+

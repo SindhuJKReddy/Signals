@@ -39,18 +39,18 @@ a:hover {
 }
 
 .sidebar {
-   background-color: var(--sidebar-bg);
+
    color: var(--sidebar-text);
    border-right: 1px solid var(--sidebar-border);
    width: 300px;
-   background: #ffffff;
+   background: var(--sidebar-bg);
    height: 100vh;
    position: sticky;
 }
 
 .sidebar a {
     margin-bottom: 1rem;
-    color: var(--sidebar-text);
+    color: var(--router-link-color);
 }
 
 i {
@@ -69,12 +69,13 @@ a.active {
     /* border-radius: 8px; */
    transition: transform 0.2s ease, box-shadow 0.2s ease;
    border-top: 1px solid grey;
+   color: var(--theme-toggle-color);
    
 }
 
 
 .theme-toggle:hover {
     transform: translateY(-2px);
-    /* background: #d1d5db; */
+    background: #d1d5db;
     
 }

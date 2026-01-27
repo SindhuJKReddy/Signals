@@ -23,6 +23,8 @@ export class StudentService {
     this.studentsSignal().find(s => s.id === this.selectedStudentId()) ?? null
   );
 
+  previousStudentCount = signal<number>(0);
+
   // ✅ signal holds STUDENT data
   private studentsSignal = signal<Student[]>([]);
   students = this.studentsSignal.asReadonly();
@@ -41,6 +43,7 @@ export class StudentService {
     this.http
       .get<Student[]>('Data/students.json')
       .subscribe(data => {
+        this.previousStudentCount.set(this.studentsSignal().length);
         this.studentsSignal.set(data);
       });
   }

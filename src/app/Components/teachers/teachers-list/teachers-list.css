@@ -40,7 +40,7 @@
   justify-content: space-between;
   margin-top: 1rem;
   padding: 0.75rem 1rem;
-  background: #e9f1fd; 
+  background: var(--table-background-color); 
   border-radius: 8px;
 }
 
@@ -53,9 +53,40 @@
 .selection-bar .p-button {
   margin-left: auto;
 } 
-.department {
-    width: 150px;
+.department-dropdown {
+    width: 140px;
 }
-.status {
+.status-dropdown {
     width: 120px;
 }
+ tr  {
+  background: var(--tr-color);
+}
+td {
+  color: var(--td-color);
+}
+ :host ::ng-deep .p-datatable .p-datatable-tbody > tr:hover {
+  background-color: var(--table-hover-bg, #2a2a2a);
+}
+
+.status-dropdown,
+.department-dropdown {
+  background: var(--table-background-color);
+  color: whitesmoke;
+}
+
+:host ::ng-deep .p-datatable .p-datatable-thead > tr > th {
+  background-color: var(--th-background-color);
+  color: var(--th-color, var(--p-text-color));
+  border-color: var(--border-color);
+}
+:host ::ng-deep .p-inputtext {
+  background-color: var(--table-bg);
+  color: var(--search-color);
+  border-color: var(--border-color);
+}
+:host ::ng-deep .p-inputtext::placeholder {
+  color: var(--text-secondary);
+}
+
+

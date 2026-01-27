@@ -20,6 +20,8 @@ export class TeacherService {
   private teachersSignal = signal<Teacher[]>([]);
   teachers = this.teachersSignal.asReadonly();
 
+  previousTeacherCount = signal<number>(0);
+
   //  Selected teacher (by email)
   selectedTeacherEmail = signal<string | null>(null);
 
@@ -38,6 +40,7 @@ export class TeacherService {
     this.http
       .get<Teacher[]>('Data/teachers.json')
       .subscribe(data => {
+        this.previousTeacherCount.set(this.teachersSignal().length);
         this.teachersSignal.set(data);
       });
   }

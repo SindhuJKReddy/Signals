@@ -11,7 +11,6 @@ import { effect } from '@angular/core';
 @Component({
   selector: 'app-update-workers',
   imports: [
-    RouterOutlet,
     DialogModule,
     FormsModule,
     CommonModule,

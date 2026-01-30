@@ -1,14 +1,14 @@
-import { Injectable, signal } from '@angular/core';
+// import { Injectable, signal } from '@angular/core';
 
-@Injectable({
-  providedIn: 'root',
-})
-export class ThemeService {
+// @Injectable({
+//   providedIn: 'root',
+// })
+// export class ThemeService {
 
-  isDarkTheme = signal<boolean>(false);
+//   isDarkTheme = signal<boolean>(false);
 
-  toggleTheme() {
-    this.isDarkTheme.set(!this.isDarkTheme());
-  }
+//   toggleTheme() {
+//     this.isDarkTheme.set(!this.isDarkTheme());
+//   }
   
-}
+// }

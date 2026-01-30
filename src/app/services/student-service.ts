@@ -41,7 +41,7 @@ export class StudentService {
 
   private loadStudents() {
     this.http
-      .get<Student[]>('Data/students.json')
+      .get<Student[]>('http://localhost:4001/students')
       .subscribe(data => {
         this.previousStudentCount.set(this.studentsSignal().length);
         this.studentsSignal.set(data);

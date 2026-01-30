@@ -10,7 +10,7 @@ import { Teacher } from '../../../../services/teacher-service';
 
 @Component({
   selector: 'app-add-workers',
-  imports: [RouterOutlet,
+  imports: [
     ButtonModule,
     InputTextModule,
     DialogModule,

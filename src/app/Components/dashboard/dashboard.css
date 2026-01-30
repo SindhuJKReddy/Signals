@@ -43,24 +43,25 @@
 }
 
 .card-icon.blue {
-  background: #e0e7ff;
-  color: #4f46e5;
+  background: var(--primary-soft);
+  color: var(--primary);
 }
 
 .card-icon.green {
-  background: #dcfce7;
-  color: #16a34a;
+  background: var(--success-soft);
+  color: var(--success);
 }
 
 .card-icon.purple {
-  background: #f3e8ff;
-  color: #9333ea;
+  background: var(--indigo-soft);
+  color: var(--indigo);
 }
 
 .card-icon.orange {
-  background: #ffedd5;
-  color: #ea580c;
+  background: var(--warning-soft);
+  color: var(--warning);
 }
+
 .card-content h3 {
   margin: 0;
   font-size: 1.5rem;
@@ -111,8 +112,8 @@ span.trend i {
 
 /* pie chart */
 .pie-chart {
-  margin-left: 150px;
-  height: 275px;
+  height: 300px;
+  width: 100%;
 }
 
 /* Vaerical Bar */

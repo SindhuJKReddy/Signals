@@ -14,7 +14,6 @@ import { InputGroupModule } from 'primeng/inputgroup';
   selector: 'app-update-teachers',
   standalone: true,
   imports: [
-    RouterOutlet,
     DialogModule,
     FormsModule,
     CommonModule,

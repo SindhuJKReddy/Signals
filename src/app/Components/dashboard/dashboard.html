@@ -100,13 +100,23 @@
     <!-- PIE CHART -->
     <div class="card ">
         <h4>Student status distribution</h4>
-        <p-chart type="pie" [data]="studentStatusDistribution()" [options]="studentStatusOptions" class="pie-chart" />
+        <p-chart 
+         type="pie" 
+         [data]="studentStatusDistribution()" 
+         [options]="studentStatusOptions" 
+         class="pie-chart" 
+         />
     </div>
 
     <!-- vertical bar/ Department overview -->
     <div class="card">
         <h4>Department Overview</h4>
-        <p-chart type="bar" [data]="departmentOverview()" [options]="departmentOptions" class="vertical-bar" />
+        <p-chart 
+        type="bar" 
+        [data]="departmentOverview()" 
+        [options]="departmentOptions" 
+        class="vertical-bar" 
+        />
     </div>
 </div>
 
@@ -135,8 +145,8 @@
         <div class="stat purple ">
 
             <div>
-                <p class="stat-label">Worker : Teacher Ratio</p>
-                <h4>{{ workerToTeacherRatio() }}</h4>
+                <p class="stat-label">Worker to Student Ratio</p>
+                <h4>{{ workerToStudentRatio() }}</h4>
             </div>
         </div>
     </div>

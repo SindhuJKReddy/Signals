@@ -21,7 +21,6 @@ import { Teacher } from '../../../services/teacher-service';
 @Component({
   selector: 'app-workers-list',
   imports: [
-    RouterOutlet,
    TableModule,
     InputTextModule,
     IconField,

@@ -10,7 +10,6 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-add-student',
   imports: [
-    RouterOutlet,
     ButtonModule,
     InputTextModule,
     Dialog,

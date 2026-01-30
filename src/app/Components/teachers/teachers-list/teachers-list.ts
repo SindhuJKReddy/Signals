@@ -20,7 +20,6 @@ import { ButtonModule } from 'primeng/button';
 @Component({
   selector: 'app-teachers-list',
   imports: [
-    RouterOutlet,
     AddTeachers,
     UpdateTeachers,
     Toast,

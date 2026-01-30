@@ -12,7 +12,6 @@ import { inject } from '@angular/core';
 @Component({
   selector: 'app-update-student',
   imports: [
-    RouterOutlet,
     DialogModule,
     FormsModule,
     CommonModule,

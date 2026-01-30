@@ -11,7 +11,6 @@ import { CommonModule } from '@angular/common';
   selector: 'app-add-teachers',
   standalone: true,
   imports: [
-    RouterOutlet,
     ButtonModule,
     InputTextModule,
     DialogModule,

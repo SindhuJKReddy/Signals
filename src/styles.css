@@ -3,10 +3,13 @@
 * {
     padding: 0;
     margin: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
+
 h2 {
     color: var(--h2-color);
 }
+
 .container {
     display: flex;
     gap: 1rem;
@@ -14,16 +17,7 @@ h2 {
     margin-bottom: 10px;
 }
 
-/* p-chart {
-  display: block;
-  width: 100%;
-} */
-
-.card p-chart {
-  height: 300px;
-}
-
-.card p-chart {
+.card .p-chart {
   height: 320px;
 }
 
@@ -33,62 +27,58 @@ h2 {
   }
 }
 
-
-
-
-
 /* Themes */
 :root {
   color-scheme: light;  /* this is, so that the browser open in light mode as soon as we open it*/
   --app-bg: var(--p-gray-50);
- --table-bg: #ffffff;
-  --card-bg: #ffffff;
-
   --text-primary: var(--p-gray-800);
   --text-secondary: var(--p-gray-500);
-
   --border-color: var(--p-gray-200);
+
   --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.05);
-
-   --p-text-color: #374151; /* dark gray for light mode */
-   --dashboard-text-color: #374151;
-   --h2-color: black;
-
-   /* Footer */
-   --footer-text-color: black;
-   --footer-h4-color: black;
-   
-  
-  --tr-color: #ffffff;
-  --td-color: black;
+  --card-bg: #ffffff;
+  --p-text-color: #374151; /* dark gray for light mode */
+  --dashboard-text-color: #374151;
+  --h2-color: black;
+  --footer-text-color: black;
+  --footer-h4-color: black;
   --search-color: black;
   --th-background-color: #ffffff;
-  --table-background-color: #ffffff;
-
   --sidebar-bg: #f3f4f6;
   --router-link-color: black;
- --theme-toggle-color: black;
-
-  --table-header-bg: #ffffff;
-
-   /* Light mode hover (matches your screenshot) */
-  --table-hover-bg: #f3f6fb;
-
-  /* Light mode hover text */
-  --table-hover-text: #111827;
-
-  /* dialog */
+  --theme-toggle-color: black;
+  --a-color: black;
   --dialog-bg: #ffffff;
   --dialog-text: #111827;
-  /* --dialog-border: #e5e7eb; */
   --input-bg: #ffffff;
   --button-cancel-bg: #ffffff;
   --button-cancel-hover: #f5f6f8;
-  --summary-card-bg: #ffffff;
+  --summary-card-bg: #ffffff;  
+  --sidebar-active-color: #e0e7ff;  
+  --sidebar-hover-bg: #e2e5e9;
+  --user-info-bg: #e0e7ff;
 
-  
+  --table-bg: #ffffff;
+  --table-background-color: #ffffff;
+  --tr-color: #ffffff;
+  --td-color: black;
+  --table-hover-bg: #f3f6fb;
+  --table-hover-text: #111827;
+  --table-header-bg: #ffffff;
 
-  
+  --primary: #2563eb;
+    --primary-soft: #dbeafe;
+ 
+    --success: #10b981;
+    --success-soft: #d1fae5;
+ 
+    --warning: #f59e0b;
+    --warning-soft: #fef3c7;
+ 
+    --indigo: #6366f1;
+    --indigo-soft: #e0e7ff;
+
+  --surface-hover: #eef2ff; 
 }
 
 body.dark-theme {
@@ -98,56 +88,67 @@ body.dark-theme {
   --text-primary: var(--p-gray-100);
   --text-secondary: var(--p-gray-400);
   --border-color: var(--p-gray-700);
+  --summary-card-bg: var(--p-gray-800);
   --shadow-sm: 0 8px 20px rgba(0, 0, 0, 0.35);
   --p-text-color: #ffffff; /* white in dark mode */
   --dashboard-text-color: #ffffff; 
   --h2-color: white;
-
-  /* Footer */
   --footer-text-color: #ffffff;
   --footer-h4-color: #ffffff;
-   --tr-color: var(--p-gray-900);
-   --td-color: #ffffff;
-   --th-background-color: rgb(33, 31, 31);
-   --th-color: #ffffff;
-   --search-color: #ffffff;
-   --table-background-color: black;
-    --sidebar-bg: #020617;
-    --router-link-color: #ffffff;
-    --theme-toggle-color: #ffffff;
-
-     --table-header-bg: var(--p-gray-800);
-
-      /* Dark mode hover */
-  --table-hover-bg: #2a2a2a;
-
-  /* Dark mode hover text */
-  --table-hover-text: #9ca3af;
-
+  --search-color: #ffffff;
+  --sidebar-bg: #020617;
+  --router-link-color: #ffffff;
+  --theme-toggle-color: #ffffff;
+  --a-color: #ffffff;
   --dialog-bg: #020617;
   --dialog-text: #e5e7eb;
-  /* --dialog-border: #1e293b; */
   --input-bg: #020617;
   --button-cancel-bg: #020617;
   --button-cancel-hover: #0b1220;
+  --sidebar-active-color: #1e3a8a;
+  --sidebar-hover-bg: #546072;
+  --user-info-bg: rgb(36, 34, 34);
 
-  --summary-card-bg: var(--p-gray-800);
+  --table-hover-bg: #2a2a2a;
+  --table-hover-text: #9ca3af;
+  --table-background-color: black;
+  --td-color: #ffffff;
+  --th-background-color: rgb(33, 31, 31);
+  --th-color: #ffffff;
+  --tr-color: var(--p-gray-900);
+  --table-header-bg: var(--p-gray-800);
+
+    --primary: #60a5fa;
+    --primary-soft: rgba(96, 165, 250, 0.2);
+ 
+    --success: #34d399;
+    --success-soft: rgba(52, 211, 153, 0.2);
+ 
+    --warning: #fbbf24;
+    --warning-soft: rgba(251, 191, 36, 0.2);
+ 
+    --indigo: #a5b4fc;
+    --indigo-soft: rgba(165, 180, 252, 0.2);
+
+    --surface-hover: #303030; 
 }
 
 p {
   color: var(--p-text-color);
 }
+
 .p-datatable .p-datatable-header {
   background: var(--table-header-bg) !important;
   border: none;
 }
+
 .p-dialog .p-dialog-header,
 .p-dialog .p-dialog-content,
 .p-dialog .p-dialog-footer {
   background: var(--dialog-bg);
   color: var(--dialog-text);
-  /* border-color: var(--dialog-border); */
 }
+
 
 
 

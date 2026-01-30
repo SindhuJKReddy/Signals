@@ -217,6 +217,8 @@ export class Dashboard {
 });
 
   studentStatusOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       legend: {    
         color: '#e5e7eb',
@@ -345,23 +347,16 @@ studentRetentionRate = computed(() => {
 });
 
 // Staff to student Ratio
-workerToTeacherRatio = computed(() => {
-  const teachers = this.totalTeachers();
+workerToStudentRatio = computed(() => {
   const workers = this.totalWorkers();
+  const students = this.totalStudents();
 
-  if (teachers === 0 || workers === 0) {
+  if (workers === 0 || students === 0) {
     return '0:0';
   }
 
-  // helper function to find GCD
-  const gcd = (a: number, b: number): number =>
-    b === 0 ? a : gcd(b, a % b);
-
-  const divisor = gcd(workers, teachers);
-
-  const staffRatio = workers / divisor;
-  const teacherRatio = teachers / divisor;
-
-  return `${staffRatio}:${teacherRatio}`;
+  const ratio = (workers / students).toFixed(2);
+  return `${ratio}:1`;
 });
+
 }

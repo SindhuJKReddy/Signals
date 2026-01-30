@@ -1,32 +1,55 @@
-<div class=container>
-  <div class="sidebar">
-    <h3 class="title">{{ title }}</h3>
+<p-toast position="top-right"></p-toast>
+<div class="app-container">
+  <aside class="sidebar" *ngIf="showSidebar">
+    <h2 class="logo">{{ title }}</h2>
 
-    <a routerLink="/dashboard" routerLinkActive="active">
-      <i class="pi pi-objects-column"></i>
-       Dashboard</a>
-
-    <a routerLink="/student-list" routerLinkActive="active">
-      <i class="pi pi-graduation-cap"></i>
-       Students</a>
-
-    <a routerLink="/teachers-list" routerLinkActive="active">
-      <i class="pi pi-users"></i> 
-      Teachers</a>
-
-    <a routerLink="/workers-list" routerLinkActive="active">
-      <i class="pi pi-briefcase"></i>
-       Workers</a>
-
-       <div class="theme-toggle" (click)="toggleTheme()">
-           <i class="pi" [class.pi-moon]="!isDark" [class.pi-sun]="isDark"></i>
-           <span>{{ isDark ? 'Light Mode' : 'Dark Mode' }}</span>
+    <div class="user-info" *ngIf="userName">
+      <div class="user-avatar">
+        {{ userName.charAt(0).toUpperCase() }}
       </div>
-      
-  </div>
-  
-  <main class="main-content">
-    <router-outlet />
-  </main>
 
+      <div class="user-details">
+        <div class="user-name">{{ userName }}</div>
+        <div class="user-role">{{ userRole }}</div>
+      </div>
+    </div>
+
+    <nav class="menu">
+      <a routerLink="/dashboard" routerLinkActive="active">
+        <i class="pi pi-th-large"></i>
+        Dashboard
+      </a>
+
+      <a routerLink="/student-list" routerLinkActive="active">
+        <i class="pi pi-graduation-cap"></i>
+        Students
+      </a>
+
+      <a routerLink="/teachers-list" routerLinkActive="active">
+        <i class="pi pi-users"></i>
+        Teachers
+      </a>
+
+      <a routerLink="/workers-list" routerLinkActive="active">
+        <i class="pi pi-briefcase"></i>
+        Workers
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="theme-toggle" (click)="toggleTheme()">
+        <i class="pi" [class.pi-moon]="!isDark" [class.pi-sun]="isDark"></i>
+        <span>{{ isDark ? 'Light Mode' : 'Dark Mode' }}</span>
+      </div>
+
+      <button class="logout" (click)="logout()">
+        <i class="pi pi-sign-out"></i>
+        <span>Logout</span>
+      </button>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <router-outlet></router-outlet>
+  </main>
 </div>

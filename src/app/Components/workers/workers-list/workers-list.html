@@ -16,13 +16,16 @@
 
 <!-- toast -->
 <div class="card flex justify-center">
-  <p-toast [breakpoints]="{ '920px': { width: '100%', right: '0', left: '0' } }" />
+  <p-toast 
+     [breakpoints]="{ '920px': { width: '100%', right: '0', left: '0' } }" />
 </div>
 
 <div class="card">
-  <p-table #dt [value]="workers()" 
+  <p-table 
+  #dt 
+  [value]="workers()" 
   [scrollable]="true"
-  scrollHeight="100vh"
+  scrollHeight="calc(100vh - 120px)"
   [virtualScroll]="true"
   [virtualScrollItemSize]="48"
   dataKey="email" 
@@ -38,9 +41,13 @@
           <p-inputicon>
             <i class="pi pi-search"></i>
           </p-inputicon>
-          <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
-            placeholder="Search workers" class="global-search" />
-        </p-iconfield>
+            <input 
+              pInputText 
+              type="text" 
+              (input)="dt.filterGlobal($event.target.value, 'contains')"
+              placeholder="Search workers" 
+              class="global-search" />
+          </p-iconfield>
 
         <p-select 
         class="shift-dropdown"
@@ -68,7 +75,12 @@
           {{ selectedWorkers.length }} worker(s) selected
         </span>
 
-        <button pButton label="Delete Selected" icon="pi pi-trash" class="p-button-danger" (click)="deleteSelected()">
+        <button 
+           pButton 
+           label="Delete Selected" 
+           icon="pi pi-trash" 
+           class="p-button-danger" 
+           (click)="deleteSelected()">
         </button>
       </div>
     </ng-template>
@@ -94,8 +106,6 @@
     <!-- Table Body -->
     <ng-template #body let-worker>
       <tr>
-        
-
         <td>
           <p-tableCheckbox [value]="worker"></p-tableCheckbox>
         </td>
@@ -103,8 +113,6 @@
         <td>{{ worker.email }}</td>
         <td>{{ worker.role }}</td>
         <td>{{ worker.department }}</td>
-        
-
         <td>
           <p-tag [value]="worker.shift" [severity]="getShiftSeverity(worker.shift)">
           </p-tag>
@@ -115,12 +123,19 @@
           </p-tag>
         </td>
         <td class="actions-column">
-          <button pButton type="button" icon="pi pi-pencil" class="p-button-rounded p-button-text"
-            (click)="editWorker(worker)">
+          <button   
+             pButton type="button" 
+             icon="pi pi-pencil" 
+             class="p-button-rounded p-button-text"           
+             (click)="editWorker(worker)">
           </button>
 
-          <button pButton type="button" icon="pi pi-trash" class="p-button-rounded p-button-text p-button-danger"
-            (click)="onDelete(worker)">
+          <button 
+             pButton 
+             type="button" 
+             icon="pi pi-trash" 
+             class="p-button-rounded p-button-text p-button-danger"           
+             (click)="onDelete(worker)">
           </button>
 
         </td>

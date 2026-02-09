@@ -1,6 +1,5 @@
 import { Component, signal } from '@angular/core';
 import { StudentService, Student } from '../../../../services/student-service';
-import { RouterOutlet } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { Dialog } from 'primeng/dialog';
@@ -15,70 +14,74 @@ import { CommonModule } from '@angular/common';
     Dialog,
     FormsModule,
     CommonModule,
-    
+
   ],
   templateUrl: './add-student.html',
   styleUrl: './add-student.css',
 })
 export class AddStudent {
   phone = '';
-  name = '';
-  grade = '';
-  department = '';
-  enrollment = '';
-  status = 'Active';
+  guardianName = '';
   address = '';
- 
+  
   display = false;
- 
+
   student: Partial<Student> = {
     id: 0,
-    name: '',
+    firstName: '',
+    lastName: '',
     email: '',
-    grade: '',
-    status: undefined
+    age: 0,
+    course: '',
+    year: 1,
+    rollNumber: '',
+    enrollmentDate: ''
   };
 
   constructor(public studentService: StudentService) { }
 
-  addStudent(id:0, name: string, email: string, phone: string, grade: string, enrollment: string, department: string, status: string) {
-    const student: Student = {
-      id: 0,
-      name,
-      email,
-      phone: Number(phone),
-      grade,
-      department,
-      enrollment: Number(enrollment),
-      status: 'Active'
-    };
-
-    this.studentService.addStudent(student);
+  cancel() {
+    this.studentService.closeAddDialog();
   }
 
-cancel() {
-  this.studentService.closeAddDialog();
-}
+  save() {
+    if (
+      !this.student.firstName ||
+      !this.student.lastName ||
+      !this.student.email ||
+      !this.student.rollNumber ||
+      !this.student.course
+    ) {
+      alert('Please fill all required fields');
+      return;
+    }
 
-save() {
-  if (!this.student) return;
+    const newStudent = {
+      firstName: this.student.firstName,
+      lastName: this.student.lastName,
+      email: this.student.email,
+      age: Number(this.student.age ?? 0),
+      course: this.student.course,
+      year: Number(this.student.year ?? 1),
+      rollNumber: this.student.rollNumber,
+       enrollmentDate: this.student.enrollmentDate
+    ? new Date(this.student.enrollmentDate).toISOString()
+    : null
+    };
 
-  const newStudent: Student = {
-    id: Number(this.student.id),
-    name: this.student.name ?? '',
-    email: this.student.email ?? '',
-    phone: Number(this.student.phone ?? 0),
-    grade: this.student.grade ?? '',
-    department: this.student.department ?? '',
-    enrollment: Number(this.student.enrollment ?? 0),
-    status: this.student.status ?? 'Active'
-  };
+    this.studentService.addStudentToApi(newStudent as any);
+    this.studentService.closeAddDialog();
 
-  this.studentService.addStudent(newStudent);
-  this.studentService.closeAddDialog();
-
-  // optional: reset form
-  this.student = {};
-}
-
+    // optional: reset form
+    this.student = {
+      firstName: '',
+      lastName: '',
+      email: '',
+      age: 0,
+      course: '',
+      year: 1,
+      rollNumber: '',
+      enrollmentDate: ''
+    };
+  }
 }

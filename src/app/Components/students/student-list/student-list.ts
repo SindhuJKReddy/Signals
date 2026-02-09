@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, computed } from '@angular/core';
 import { StudentService, Student } from '../../../services/student-service';
 import { TableModule } from 'primeng/table';
 import { InputTextModule } from 'primeng/inputtext';
@@ -40,51 +40,87 @@ import { Select } from 'primeng/select';
   styleUrl: './student-list.css',
 })
 export class StudentList {
-
+  ngOnInit() {
+  this.studentService.loadStudents();
+}
   constructor(private studentService: StudentService,
     private messageService: MessageService,
-    
-  ) { }
-
+  ) {}
   
-
+// To add 1000 columns with less code
+  columns = computed(() => {
+    const data = this.students(); // reactive
+    if (!data || data.length === 0) return [];
+ 
+    const customWidths: Record<string, string> = {
+      id: '70px',
+      firstName: '140px',
+      lastName: '135px',
+      age: '90px',
+      email: '150px',
+      course: '170px',
+      year: '100px',
+      rollNumber: '150px',
+      enrollmentDate: '150px'
+    };
+ 
+    return Object.keys(data[0]).map(key => ({
+      field: key,
+      header: key.charAt(0).toUpperCase() + key.slice(1),
+      width: customWidths[key] || '150px',
+      type: key === 'status' ? 'tag' : 'text'
+    }));
+  });
 
   // ✅ Expose signal to template
   get students() {
     return this.studentService.students;
   }
 
-  getSeverity(status: string) {
-    switch (status) {
-      case 'Inactive':
-        return 'warn';
-
-      case 'Active':
-        return 'success';
-
-      case 'Suspended':
+  getYearSeverity(year: number) {
+    switch (year) {
+      case 1:
         return 'danger';
-
-      case 'Graduated':
+      case 2:
+        return 'warn';
+      case 3:
         return 'info';
-
+      case 4:
+        return 'success';
       default:
         return null;
     }
   }
+
+  onSearchChange(value: string) {
+    if (!value || value.trim() === '') {
+      // Reset to show all students
+      this.studentService.resetStudents();
+    } else {
+      // Search by ID
+      const id = Number(value);
+      if (!isNaN(id)) {
+        this.studentService.searchStudentById(id);
+      }
+    }
+  }
+  
   editStudent(student: Student) {
     this.studentService.openEditDialog(student.id);
   }
   onDelete(student: Student) {
-    if (confirm('Are you sure you want to delete?')) 
-    this.studentService.deleteStudent(student.id);
+    const confirmed = confirm('Are you sure you want to delete?');
     
+    if (!confirmed) {
+      return;
+    }  
 
+    this.studentService.deleteStudentApi(student.id);
 
     this.messageService.add({
       severity: 'success',
       summary: 'Deleted',
-      detail: `${student.name} deleted successfully`,
+      detail: `${student.firstName} deleted successfully`,
       life: 3000
     });
   }
@@ -93,28 +129,27 @@ export class StudentList {
     this.studentService.openAddDialog();
   }
 
-
-  //status
-  statusOptions = [
-    { label: 'All Status', value: null },
-    { label: 'Active', value: 'Active' },
-    { label: 'Inactive', value: 'Inactive' },
-    { label: 'Suspended', value: 'Suspended' },
-    { label: 'Graduated', value: 'Graduated' }
+  // Year filter
+  yearOptions = [
+    { label: 'All Years', value: null },
+    { label: 'Year 1', value: 1 },
+    { label: 'Year 2', value: 2 },
+    { label: 'Year 3', value: 3 },
+    { label: 'Year 4', value: 4 }
   ];
 
-  selectedStatus: string | null = null;
+  selectedYear: number | null = null;
 
-  // Grades
-  gradesOptions = [
-    { label: 'All Grades', value: null },
-    { label: '10th', value: '10th' },
-    { label: '11th', value: '11th' },
-    { label: '12th', value: '12th' }
+  // Course filter
+  courseOptions = [
+    { label: 'All Courses', value: null },
+    { label: 'CS', value: 'CS' },
+    { label: 'IT', value: 'IT' },
+    { label: 'ECE', value: 'ECE' },
+    { label: 'ME', value: 'ME' }
   ];
 
-  selectedGrade: string | null = null;
-
+  selectedCourse: string | null = null;
 
   // Exports 
   exportJSON() {
@@ -161,13 +196,16 @@ export class StudentList {
 
   selectedStudents: Student[] = [];
 
-  deleteSelected() {
-    if (confirm('Are you sure you want to delete?')) 
-    if (!this.selectedStudents.length) return;
+  deleteSelected() { 
+    // const confirmed = confirm('Are you sure you want to delete?');
+    
+    // if (!confirmed) {
+    //   return;
+    // }  
 
     const ids = this.selectedStudents.map(s => s.id);
 
-    this.studentService.deleteStudents(ids);
+    this.studentService.deleteStudentsApi(ids);
 
     this.messageService.add({
       severity: 'success',

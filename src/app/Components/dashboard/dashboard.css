@@ -8,6 +8,22 @@
   color: var(--dashboard-text-color);
   margin-bottom: 20px;
 }
+
+.dark-mode-toggle {
+  padding: 8px 16px;
+  border: 1px solid var(--border-color);
+  background: var(--card-bg);
+  color: var(--text-primary);
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+}
+
+.dark-mode-toggle:hover {
+  background: var(--primary-soft);
+}
 .dashboard-cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -102,25 +118,35 @@ span.trend i {
 
 .charts-section {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
 }
 
-.bar-chart {
-  height: 300px;
+.chart {
+  margin-top: 2rem;
+  border-radius: 12px;
+  background: var(--card-bg);
 }
 
-/* pie chart */
-.pie-chart {
-  height: 300px;
-  width: 100%;
+.chart h3 {
+  text-align: center;
+  margin-top: 2rem;
+  margin-bottom: 0;
 }
 
-/* Vaerical Bar */
+.line-chart,
+.bar-chart,
+.pie-chart,
 .vertical-bar {
-  width: 650px;
+  width: 100%;
   height: 350px;
 }
+
+.pie-chart,
+.vertical-bar {
+  padding: 1.5rem;
+}
+
 /* Footer */
 .footer {
   background: var(--summary-card-bg);
@@ -129,20 +155,25 @@ span.trend i {
   border-radius: 12px;
   padding: 1rem; 
 }
+
 h3 {
   margin-bottom: 1rem;
   color: var(--footer-text-color);
 }
+
 h4 {
   color: var(--footer-h4-color);
 }
+
 .quick-stats {
   display: flex;
   gap: 5rem;
 }
+
 p {
    margin-bottom: 0.5rem;
 }
+
 .stat {
   border-left: 4px solid;
   padding-left: 15px;
@@ -151,15 +182,19 @@ p {
 .stat.green {
   border-color: #10b981;
 }
+
 .stat.blue {
   border-color: #3b82f6;
 }
+
 .stat.purple {
   border-color: rgb(216, 93, 216);
 }
+
 h4 {
   font-size: 1.5rem;
 }
+
 .stat-label {
   font-weight: 600;
 }

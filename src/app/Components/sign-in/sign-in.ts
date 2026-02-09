@@ -7,6 +7,8 @@ import { PasswordModule } from 'primeng/password';
 import { ButtonModule } from 'primeng/button';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth-service';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-sign-in',
@@ -18,6 +20,7 @@ import { AuthService } from '../../services/auth-service';
     InputTextModule,
     PasswordModule,
     ButtonModule,
+    ToastModule
   ],
   templateUrl: './sign-in.html',
   styleUrl: './sign-in.css',
@@ -25,17 +28,26 @@ import { AuthService } from '../../services/auth-service';
 export class SignIn {
 
    signInForm!: FormGroup;
- 
-  constructor(
-    private fb: FormBuilder,
-    private auth: AuthService,
-    private router: Router
-  ) {
-    this.signInForm = this.fb.group({
+
+   private fb = inject(FormBuilder)
+   private auth = inject(AuthService)
+   private router = inject(Router)
+   private messageService = inject(MessageService)
+
+//This is so that we get the email from the state when navigating from sign-up to sign-in
+ngOnInit(): void {
+
+  this.signInForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
+
+  const email = history.state?.email;
+
+  if (email) {
+    this.signInForm.patchValue({ email });
   }
+}
  
   get f() {
     return this.signInForm.controls;
@@ -49,12 +61,22 @@ export class SignIn {
  
     const { email, password } = this.signInForm.value;
  
-    const success = this.auth.signIn(email, password);
- 
-    if (success) {
+    this.auth.signIn(email, password).subscribe({
+    next: (res) => {
+      // Save token & user
+      this.auth.saveLogin(res);
+
+      // Navigate after successful login
       this.router.navigate(['/dashboard']);
-    } else {
-      alert('Invalid email or password');
+    },
+    error: () => {
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: 'Invalid email or password',
+        life: 3000
+      });
     }
+  });
   }
 }

@@ -1,6 +1,7 @@
 <h3 class="dashboard-title">Dashboard</h3>
 <p class="dashboard-subtitle">Overview of school management system</p>
 
+
 <div class="dashboard-cards">
 
     <div class="card">
@@ -26,13 +27,11 @@
 
     <div class="card">
 
-        <div class="trend"
-                    [class.up]="teacherSharePercent() > 0"
-                    [class.down]="teacherSharePercent() < 0">
- 
-                    <i class="pi pi-arrow-up"></i>
-                    <span>{{ teacherSharePercent() }}%</span>
-                </div>
+        <div class="trend" [class.up]="teacherSharePercent() > 0" [class.down]="teacherSharePercent() < 0">
+
+            <i class="pi pi-arrow-up"></i>
+            <span>{{ teacherSharePercent() }}%</span>
+        </div>
 
         <div class="card-icon green">
             <i class="pi pi-user"></i>
@@ -47,13 +46,11 @@
 
     <div class="card">
 
-        <div class="trend"
-                    [class.up]="workerSharePercent() > 0"
-                    [class.down]="workerSharePercent() < 0">
- 
-                    <i class="pi pi-arrow-up"></i>
-                    <span>{{ workerSharePercent() }}%</span>
-                </div>
+        <div class="trend" [class.up]="workerSharePercent() > 0" [class.down]="workerSharePercent() < 0">
+
+            <i class="pi pi-arrow-up"></i>
+            <span>{{ workerSharePercent() }}%</span>
+        </div>
 
         <div class="card-icon purple">
             <i class="pi pi-briefcase"></i>
@@ -83,40 +80,31 @@
 <div class="charts-section">
 
     <!-- Graph Chart -->
-    <div class=" card">
-        <h4>Student Enrollment Trend</h4>
-        <p-chart type="line" [data]="enrollmentData()" [options]="chartOptions"></p-chart>
+    <div class="chart">
+        <h3>Student Enrollment Trend</h3>
+        <div echarts [options]="enrollmentOption()" class="line-chart">
+        </div>
     </div>
 
     <!-- Bar Chart -->
-    <div class=" card">
-        <h4>Students by Grade</h4>
-
-        <p-chart type="bar" [data]="studentsByGradeData()" [options]="studentsByGradeOptions" class="bar-chart">
-        </p-chart>
+    <div class=" chart "> 
+        <h3>Students by Course</h3>
+        <div echarts [options]="studentsByCourseData()" class="bar-chart">
+        </div>
     </div>
 
-
     <!-- PIE CHART -->
-    <div class="card ">
-        <h4>Student status distribution</h4>
-        <p-chart 
-         type="pie" 
-         [data]="studentStatusDistribution()" 
-         [options]="studentStatusOptions" 
-         class="pie-chart" 
-         />
+    <div class="chart ">
+        <h3>Student by year Distribution</h3>
+        <div echarts [options]="studentsByYearOption()" class="pie-chart">
+        </div>
     </div>
 
     <!-- vertical bar/ Department overview -->
-    <div class="card">
-        <h4>Department Overview</h4>
-        <p-chart 
-        type="bar" 
-        [data]="departmentOverview()" 
-        [options]="departmentOptions" 
-        class="vertical-bar" 
-        />
+    <div class="chart">
+        <h3>Course Overview</h3>
+        <div echarts [options]="courseOverviewOption()" class="vertical-bar">
+        </div>
     </div>
 </div>
 
@@ -126,8 +114,6 @@
     <div class="quick-stats">
 
         <div class="stat blue">
-
-
             <div>
                 <p class="stat-label">Average Student to Teacher Ratio</p>
                 <h4>{{ averageStudentsPerTeacher() }}</h4>
@@ -135,7 +121,6 @@
         </div>
 
         <div class="stat green">
-
             <div>
                 <p class="stat-label">Student Retention Rate</p>
                 <h4>{{ studentRetentionRate() }}%</h4>
@@ -143,7 +128,6 @@
         </div>
 
         <div class="stat purple ">
-
             <div>
                 <p class="stat-label">Worker to Student Ratio</p>
                 <h4>{{ workerToStudentRatio() }}</h4>

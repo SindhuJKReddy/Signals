@@ -22,7 +22,7 @@
     "role": "Manager",
     "department": "HR",
     "shift": "Morning",
-    "status": "On Leave"
+    "status": "OnLeave"
     
   },
   {
@@ -58,7 +58,7 @@
     "role": "Supervisor",
     "department": "Logistics",
     "shift": "Evening",
-    "status": "On Leave"
+    "status": "OnLeave"
    
   },
   {

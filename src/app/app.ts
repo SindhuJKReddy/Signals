@@ -64,14 +64,8 @@ logout() {
    isDark = false;
 
   ngOnInit(): void {
-    const user = localStorage.getItem('currentUser');
-
-    if (user) {
-      const parsedUser = JSON.parse(user);
-      this.userName = parsedUser.name;
-      this.userRole = parsedUser.role ?? 'Administrator'; //default role
-    }
-
+    this.loadUser();
+    
     const savedTheme = localStorage.getItem('theme');
     this.isDark = savedTheme === 'dark';
     this.applyTheme();
@@ -90,6 +84,7 @@ logout() {
   }
 
   toggleTheme(): void {
+
     this.isDark = !this.isDark;
     localStorage.setItem('theme', this.isDark ? 'dark' : 'light');
     this.applyTheme();

@@ -61,7 +61,7 @@ export class WorkersList {
            case 'Active':
              return 'success';
 
-             case 'On Leave':
+             case 'OnLeave':
                return 'info';
      
            default:
@@ -107,7 +107,7 @@ export class WorkersList {
          { label: 'All Status', value: null },
          { label: 'Active', value: 'Active' },
          { label: 'Inactive', value: 'Inactive' },
-         { label: 'On Leave', value: 'On Leave' },
+         { label: 'OnLeave', value: 'OnLeave' },
        ];
      
        selectedStatus: string | null = null;

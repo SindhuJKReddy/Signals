@@ -1,24 +1,22 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators, FormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { Toast, ToastModule } from 'primeng/toast';
-import { MessageModule } from 'primeng/message';
 import { MessageService } from 'primeng/api';
 import { Router, RouterLink } from '@angular/router';
-import { Ripple } from 'primeng/ripple';
 import { AuthService } from '../../services/auth-service';
 
 @Component({
   selector: 'app-sign-up',
   imports: [
-    CommonModule, 
-    FormsModule, 
-    RouterLink, 
+    CommonModule,
+    FormsModule,
+    RouterLink,
     ReactiveFormsModule,
-    InputTextModule, 
-    ButtonModule, 
+    InputTextModule,
+    ButtonModule,
     ToastModule
   ],
   templateUrl: './sign-up.html',
@@ -28,10 +26,10 @@ export class SignUp {
 
   signupForm!: FormGroup;
   formSubmitted = false;
- 
+
   constructor(
-    private fb: FormBuilder, 
-    private router: Router, 
+    private fb: FormBuilder,
+    private router: Router,
     private messageService: MessageService,
     private auth: AuthService
   ) {
@@ -42,21 +40,26 @@ export class SignUp {
       confirmPassword: ['', Validators.required]
     });
   }
- 
+
   get f() {
     return this.signupForm.controls;
   }
- 
+
   onSubmit() {
     this.formSubmitted = true;
- 
+
     if (this.signupForm.invalid) {
       this.signupForm.markAllAsTouched();
       return;
     }
- 
+
     if (this.f['password'].value !== this.f['confirmPassword'].value) {
-      alert('Passwords do not match');
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: 'Passwords do not match',
+        life: 3000
+      });
       return;
     }
 
@@ -68,19 +71,24 @@ export class SignUp {
     };
 
     this.auth.signUp(user);
- 
-    this.messageService.add({ 
-      severity: 'success', 
-      summary: 'Success', 
-      detail: 'Account created', 
-      life: 3000 
+
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Success',
+      detail: 'Account created',
+      life: 3000
     });
-    
+
+    const email = this.f['email'].value;
+
     this.signupForm.reset();
     this.formSubmitted = false;
-    this.router.navigate(['/signin']);
+
+    this.router.navigate(['/signin'], {
+      state: { email }
+    });
   }
- 
+
   isInvalid(controlName: string): boolean {
     const control = this.signupForm.get(controlName);
     return !!control && control.invalid && (control.touched || this.formSubmitted);

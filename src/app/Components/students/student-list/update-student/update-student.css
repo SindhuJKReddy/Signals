@@ -1,38 +1,82 @@
-.container {
-    display: flex;
-    gap: 1rem;
-    padding: 5px;
-    margin-bottom: 10px;
-}
-.add-form .p-field {
-    margin-bottom: 0.75rem;
-}
- 
 .add-form label {
     display: block;
     font-weight: 600;
-    margin-bottom: 0.25rem;
+    margin-bottom: 0.35rem;
 }
- 
+
+.grid-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem 1.5rem;
+}
+
+.grid-form .p-field {
+    margin-bottom: 0;
+}
+
+.grid-form .full-width {
+    grid-column: 1 / -1;
+}
+
+.grid-form input,
+.grid-form select,
+.grid-form textarea {
+    width: 100%;
+}
+
+.buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
 .p-dialog .p-button {
     min-width: 6rem;
 }
- 
+
 .p-dialog .p-button-primary {
     background-color: #1976d2;
     border-color: #1976d2;
 }
- 
-.buttons {
-    display: flex;
-    gap: 1rem;
-}
+
 select {
-    width: 230px;
     background: var(--input-bg);
     color: var(--dialog-text);
     padding: 0.5rem;
     font-size: 1rem;
     border: 1px solid #ccc;
     border-radius: 4px;
+}
+
+.btn {
+  width: 48%;
+  padding: 0.6rem;
+  border-radius: 8px;
+  font-size: 0.95rem;
+} 
+.btn-cancel {
+  border: 1px solid #cbd5e1;
+  background: white;
+  color: black;
+}
+
+.btn-cancel:hover {
+    background: #f1f5f9 !important;
+    border-color: #cbd5e1 !important;
+    color: black !important;
+}
+
+.btn-update {
+  background: #2563eb;
+  color: white;
+  border: none;
+}
+.btn-update:hover {
+     background: #1e50bc;
+
+}
+
+.btn-update:hover {
+  background: #1d4ed8;
 }

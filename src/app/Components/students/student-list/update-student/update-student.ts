@@ -24,7 +24,7 @@ import { inject } from '@angular/core';
 export class UpdateStudent {
 
   private studentservice = inject(StudentService);
-visible = this.studentservice.dialogVisible;
+  visible = this.studentservice.dialogVisible;
  
   private selectedStudentSignal = this.studentservice.selectedStudent;
  
@@ -39,7 +39,7 @@ visible = this.studentservice.dialogVisible;
  
   save() {
     if (this.student) {
-      this.studentservice.updateStudent(this.student);
+      this.studentservice.updateStudentApi(this.student);
       this.studentservice.closeDialog();
     }
   }

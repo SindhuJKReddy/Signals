@@ -4,14 +4,30 @@
         <h2>Student List</h2>
 
         <!-- Export buttons -->
-        <button pButton label="Export CSV" icon="pi pi-download" class="p-button-success"
-            (click)="exportCSV()"></button>
+        <button 
+           pButton 
+           label="Export CSV" 
+           icon="pi pi-download" 
+           class="p-button-success"
+           (click)="exportCSV()">
+        </button>
 
-        <button pButton label="Export JSON" icon="pi pi-download" class="p-button-help" (click)="exportJSON()"></button>
+        <button  
+           pButton 
+           label="Export JSON" 
+           icon="pi pi-download" 
+           class="p-button-help" 
+           (click)="exportJSON()">
+        </button>
 
 
-        <button pButton type="button" label="Add Student" icon="pi pi-plus" class="add-button"
-            (click)="openAddStudent()">
+        <button  
+           pButton 
+           type="button" 
+           label="Add Student" 
+           icon="pi pi-plus" 
+           class="add-button"
+           (click)="openAddStudent()">
         </button>
     </div>
 </div>
@@ -19,16 +35,21 @@
 
 <!-- toast -->
 <div class="card flex justify-center">
-    <p-toast [breakpoints]="{ '920px': { width: '100%', right: '0', left: '0' } }" />
+    <p-toast 
+      [breakpoints]="{ '920px': { width: '100%', right: '0', left: '0' } }" />
 </div>
 
-
-
-<div class="card p-datatable">
-    <p-table #dt [value]="students()" [scrollable]="true" scrollHeight="calc(100vh - 120px)" [virtualScroll]="true"
-        [virtualScrollItemSize]="48" dataKey="id" selectionMode="multiple" [(selection)]="selectedStudents"
-        [totalRecords]="students().length" [globalFilterFields]="['name', 'email']"
-        [tableStyle]="{ 'min-width': '100%' }">
+<div class="card ">
+    <p-table 
+    #dt 
+    [value]="students()" 
+    [scrollable]="true" 
+    scrollHeight="calc(100vh - 120px)" 
+    dataKey="id" 
+    selectionMode="multiple" 
+    [(selection)]="selectedStudents" 
+    [globalFilterFields]="['firstName', 'lastName', 'email']"
+    [tableStyle]="{ 'min-width': '100vh' }">
 
         <!-- 🔍 Global Search -->
         <ng-template #caption>
@@ -37,23 +58,31 @@
                     <p-inputicon>
                         <i class="pi pi-search"></i>
                     </p-inputicon>
-                    <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')"
-                        placeholder="Search students" class="global-search" />
-                </p-iconfield>
+                       <input 
+                         pInputText 
+                         type="text" 
+                         (input)="onSearchChange($event.target.value)"
+                         placeholder="Search students"    class="global-search" />
+                    </p-iconfield>
 
                 <p-select 
-                [options]="statusOptions" 
-                [(ngModel)]="selectedStatus" 
-                placeholder="All Status"
+                    [options]="yearOptions" 
+                    [(ngModel)]="selectedYear" 
+                    placeholder="All Years"
                     optionLabel="label" 
                     optionValue="value" 
-                    (onChange)="dt.filter($event.value, 'status', 'equals')"
-                    class="status-dropdown">
+                    (onChange)="dt.filter($event.value, 'year', 'equals')"
+                    class="year-dropdown">
                 </p-select>
 
-                <p-select [options]="gradesOptions" [(ngModel)]="selectedGrade" placeholder="All Grades"
-                    optionLabel="label" optionValue="value" (onChange)="dt.filter($event.value, 'grade', 'equals')"
-                    class="grades-dropdown">
+                <p-select 
+                   [options]="courseOptions" 
+                   [(ngModel)]="selectedCourse" 
+                   placeholder="All Courses"
+                   optionLabel="label" 
+                   optionValue="value" 
+                   (onChange)="dt.filter($event.value, 'course', 'equals')"
+                   class="course-dropdown">
                 </p-select>
             </div>
 
@@ -62,7 +91,11 @@
                     {{ selectedStudents.length }} student(s) selected
                 </span>
 
-                <button pButton label="Delete Selected" icon="pi pi-trash" class="p-button-danger"
+                <button 
+                    pButton 
+                    label="Delete Selected" 
+                    icon="pi pi-trash" 
+                    class="p-button-danger"
                     (click)="deleteSelected()">
                 </button>
             </div>
@@ -70,68 +103,40 @@
         </ng-template>
 
         <!-- 🧾 Table Header -->
-        <ng-template #header>
-            <tr>
-                <th style="width: 3rem; text-align: center;">
-                    <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
-                </th>
-                <th style="text-align: left;" pSortableColumn="id">
-                    Id <p-sortIcon field="id" />
-                </th>
-                <th style="text-align: left;" pSortableColumn="name">
-                    Name <p-sortIcon field="name" />
-                </th>
-                <th style="text-align: left;" pSortableColumn="email">
-                    Email <p-sortIcon field="email" />
-                </th>
-                <th style="text-align: left;" pSortableColumn="phone">
-                    Phone <p-sortIcon field="phone" />
-                </th>
-                <th style="text-align: left;" pSortableColumn="grade">
-                    Grade <p-sortIcon field="grade" />
-                </th>
-                <th style="text-align: left;" pSortableColumn="department">
-                    Department <p-sortIcon field="department" />
-                </th>
-                <th style="text-align: left;" pSortableColumn="enrollment">
-                    Enrollment <p-sortIcon field="enrollment" />
-                </th>
-                <th style="text-align: left;" pSortableColumn="status">
-                    Status <p-sortIcon field="status" />
-                </th>
-                <th style="text-align: left;" pSortableColumn="actions">
-                    Actions <p-sortIcon field="actions" />
-                </th>
-            </tr>
-        </ng-template>
+        <ng-template pTemplate="header">
+      <tr>
+        <th style="width: 3rem"><p-tableHeaderCheckbox></p-tableHeaderCheckbox></th>
+        <th *ngFor="let col of columns()"
+            [pSortableColumn]="col.field"
+            [style.width]="col.width"
+            [style.min-width]="col.width">
+          {{ col.header }}
+          <p-sortIcon [field]="col.field"></p-sortIcon>
+        </th>
+        <th style="min-width: 150px">Actions</th>
+      </tr>
+    </ng-template>
 
         <!-- 📄 Table Body -->
-        <ng-template #body let-student>
-            <tr>
-                <td>
-                    <p-tableCheckbox [value]="student"></p-tableCheckbox>
-                </td>
-                <td>{{ student.id }}</td>
-                <td>{{ student.name }}</td>
-                <td>{{ student.email }}</td>
-                <td>{{ student.phone }}</td>
-                <td>{{ student.grade }}</td>
-                <td>{{ student.department}}</td>
-                <td>{{ student.enrollment }}</td>
-                <td>
-                    <p-tag [value]="student.status" [severity]="getSeverity(student.status)">
-                    </p-tag>
-                </td>
-
-                <td class="actions-column">
-                    <button pButton icon="pi pi-pencil" class="p-button-text p-button-success"
-                        (click)="editStudent(student)"></button>
-
-                    <button pButton icon="pi pi-trash" class="p-button-text p-button-danger"
-                        (click)="onDelete(student)"></button>
-                </td>
-            </tr>
-        </ng-template>
+        <ng-template pTemplate="body" let-student>
+      <tr class="student-row">
+        <td><p-tableCheckbox [value]="student"></p-tableCheckbox></td>
+        <td *ngFor="let col of columns()">
+          <ng-container [ngSwitch]="col.type">
+            <p-tag 
+              *ngSwitchCase="'tag'" 
+              [value]="student[col.field]" 
+              [severity]="getYearSeverity(student[col.field])">
+            </p-tag>
+            <span *ngSwitchDefault>{{ student[col.field] }}</span>
+          </ng-container>
+        </td>
+        <td class="actions-column">
+          <button pButton icon="pi pi-pencil" class="p-button-text p-button-success" (click)="editStudent(student)"></button>
+          <button pButton icon="pi pi-trash" class="p-button-text p-button-danger" (click)="onDelete(student)"></button>
+        </td>
+      </tr>
+    </ng-template>
 
         <!-- 🚫 Empty Message -->
         <ng-template #emptymessage>

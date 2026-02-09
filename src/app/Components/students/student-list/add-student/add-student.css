@@ -1,116 +1,73 @@
-
-
-.p-dialog{
-    width: 100vw !important;
-}
-
 .add-form {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    background: var(--dialog-bg);
-  color: var(--dialog-text);
-    padding: 0.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem 1.5rem;
+  padding: 1rem;
 }
- 
-.add-form .p-field {
-    margin-bottom: 0.75rem;
+
+.p-field {
+  display: flex;
+  flex-direction: column;
 }
- 
-.add-form label {
-    display: block;
-    font-weight: 600;
-    margin-bottom: 0.25rem;
+
+.full-width {
+  grid-column: span 2;
 }
- 
-.add-form input {
-    padding: 5px;
+
+label {
+  font-size: 0.9rem;
+  margin-bottom: 0.25rem;
+  font-weight: 500;
 }
- 
-button {
-    padding: 5px;
+
+input,
+select,
+textarea {
+  padding: 0.55rem;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  font-size: 0.9rem;
 }
- 
-.p-dialog .p-button {
-    min-width: 10rem;
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: #2563eb;
+  outline: none;
 }
- 
-.p-dialog .p-button.p-button-primary {
-    background-color: #1976d2;
-    border-color: #1976d2;
+
+textarea {
+  resize: none;
 }
- 
-.select {
-    padding: 0.4rem;
-    background: var(--input-bg);
-    color: var(--dialog-text);
-  /* border: 1px solid var(--dialog-border); */
-    border-radius: 5px;
-    min-width: 250px;
-}
- 
-.p-field label {
-    opacity: 0.9;
-    font-weight: 400;
-    font-size: 0.9rem;
-    font-family: system-ui, 'Segoe UI', 'Open Sans', 'Helvetica Neue', sans-serif;
-}
- 
+
 .required {
-    color: red;
+  color: red;
 }
- 
 
 .buttons {
-    display: flex;
-    gap: 1rem;
-    margin: 1rem;
-}
- 
-.btn {
-   min-width: 250px;
-   padding: 10px;
-   border: 1px solid #cbd5e1;
-   border-radius: 8px;
-}
- 
-.btn-add {
-   background-color: #155dfc;
-   color: white;
-   border: none;
-}
- 
-.btn-add:hover {
-    background-color: #1976d2;
-}
- 
-.btn-cancel {
-    background-color: var(--button-cancel-bg);
-  color: var(--dialog-text);
-  border: 1px solid var(--dialog-border);
-}
- 
-.btn-cancel:hover {
-    background-color: var(--button-cancel-hover);
-}
- 
-/* Make address take full row */
-.address-field {
-  grid-column: span 2;      /*  full width */
   display: flex;
-  flex-direction: column;  /*  label on top */
+  justify-content: space-between;
+  margin-top: 1rem;
 }
- 
-/* Textarea styling */
-.address {
-  width: 85%;
-  resize: vertical;
-  padding: 0.5rem;
-  border: 1px solid lightgrey;
-  border-radius: 6px;
-}
- 
 
-.address-field label {
-  margin-bottom: 0.25rem;
-  font-weight: 400;
+.btn {
+  width: 48%;
+  padding: 0.6rem;
+  border-radius: 8px;
+  font-size: 0.95rem;
+}
+
+.btn-cancel {
+  border: 1px solid #cbd5e1;
+  background: white;
+}
+
+.btn-add {
+  background: #2563eb;
+  color: white;
+  border: none;
+}
+
+.btn-add:hover {
+  background: #1d4ed8;
 }

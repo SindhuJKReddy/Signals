@@ -17,6 +17,7 @@
         type="email"
         placeholder="Enter your email"
         formControlName="email"
+        autocomplete="off"
       />
  
       <small class="error" *ngIf="f['email'].touched && f['email'].invalid">
@@ -34,6 +35,7 @@
         type="password"
         placeholder="Enter your password"
         formControlName="password"
+        autocomplete="new-password"
       />
  
       <small class="error" *ngIf="f['password'].touched && f['password'].invalid">

@@ -1,14 +1,9 @@
-/* tr td {
-    padding: 0.5rem;
-} */
-
 
 .header-section{
     display: flex;
     gap: 1rem;
     align-items: center;
     margin-bottom: 1rem;
-  
 }
    
 .header-section h2 {
@@ -25,7 +20,6 @@
     gap: 1rem;
 }
 
-
 .global-search {
     width: 1050px;
 }
@@ -33,7 +27,7 @@
 .table-actions {
   display: flex;
   gap: 12px;
-  margin-bottom: 16px;
+  margin-bottom: 17px;
 }
 
 /* Selection bar container */
@@ -43,12 +37,12 @@
   justify-content: space-between;
   margin-top: 1rem;
   padding: 0.75rem 1rem;
-  background: var(--table-background-color); 
+  background: var(--selected-color); 
   border-radius: 8px;
 }
 
 .selected-count {
-  color: #0d6efd; 
+  color: #0d6efd;
   font-weight: 600;
   font-size: 0.95rem;
 }
@@ -57,41 +51,50 @@
   margin-left: auto;
 }
 
-tr  {
+ :host ::ng-deep .p-datatable-tbody > tr {
+  background-color: var(--tr-color);
+}
+:host ::ng-deep .p-datatable-tbody > tr > td > th {
+  color: var(--td-color);
+}
+
+:host ::ng-deep .p-datatable .p-datatable-tbody > tr:hover > td {
+  background-color: var(--table-hover-bg) !important;
+  color: var(--table-hover-text) !important;
+}
+
+
+.student-row tr {
   background: var(--tr-color);
 }
+
 td {
   color: var(--td-color);
 }
 
-tr th {
+tr th td {
   background: var(--th-background-color);
   color: var(--th-color);
 }
 
-:host ::ng-deep .p-datatable .p-datatable-tbody > tr:hover {
-  background-color: var(--table-hover-bg, #2a2a2a);
-}
-
-
-
-.status-dropdown,
-.grades-dropdown {
+.year-dropdown,
+.course-dropdown {
   background: var(--table-background-color);
   color: whitesmoke;
 }
-
 
 :host ::ng-deep .p-datatable .p-datatable-thead > tr > th {
   background-color: var(--th-background-color);
   color: var(--th-color, var(--p-text-color));
   border-color: var(--border-color);
 }
+
 :host ::ng-deep .p-inputtext {
   background-color: var(--table-bg);
   color: var(--search-color);
   border-color: var(--border-color);
 }
+
 :host ::ng-deep .p-inputtext::placeholder {
   color: var(--text-secondary);
 }

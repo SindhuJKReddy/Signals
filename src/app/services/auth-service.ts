@@ -1,29 +1,28 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, signal, inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-   private usersKey = 'users';
+  private http = inject(HttpClient);
+  private router = inject(Router);
+
+  private baseUrl = 'http://192.168.5.13:5078/api/auth/login';
+  private tokenKey = 'jwt_token'
+
+  private usersKey = 'users';
   private loggedInKey = 'isLoggedIn';
   private currentUserKey = 'currentUser';
  
   private currentUserSignal = signal<any>(this.getStoredUser());
   user$ = this.currentUserSignal;
  
-  constructor(private router: Router) { }
- 
   private getStoredUser() {
     const data = localStorage.getItem(this.currentUserKey);
-    if (!data) return null;
-   
-    const user = JSON.parse(data);
-    if (user && !user.role) {
-      user.role = 'Administrator';
-    }
-    return user;
+     return data ? JSON.parse(data) : null;
   }
  
   signUp(user: any) {
@@ -40,34 +39,45 @@ export class AuthService {
     localStorage.setItem(this.usersKey, JSON.stringify(users));
   }
  
-  signIn(email: string, password: string): boolean {
-    const users = JSON.parse(localStorage.getItem(this.usersKey) || '[]');
-    const validUser = users.find((u: any) => u.email === email && u.password === password);
+  signIn(email: string, password: string) {
+     return this.http.post<any>(this.baseUrl, {
+    email: email,   
+    password: password
+  });
+  }
+
+  saveLogin(res: any): void {
  
-    if (validUser) {
-      if (!validUser.role) validUser.role = 'Administrator';
- 
-      localStorage.setItem(this.loggedInKey, 'true');
-      localStorage.setItem(this.currentUserKey, JSON.stringify(validUser));
-      this.currentUserSignal.set(validUser);
-      return true;
-    }
-    return false;
+  localStorage.setItem(this.tokenKey, res.token);
+
+  const user = {
+    name: res.userName ?? 'User',
+    email: res.email ?? '',
+    role: res.role ?? 'Administrator'
+  };
+
+  localStorage.setItem(this.loggedInKey, 'true');
+  localStorage.setItem(this.currentUserKey, JSON.stringify(user));
+
+  this.currentUserSignal.set(user);
+}
+
+  getToken(): string | null {
+    return localStorage.getItem(this.tokenKey);
   }
  
   getCurrentUser() {
     return this.currentUserSignal();
   }
- 
- 
+  
   logout() {
     localStorage.removeItem(this.loggedInKey);
     localStorage.removeItem(this.currentUserKey);
     this.currentUserSignal.set(null);
-    // this.router.navigate(['/auth']);
+    this.router.navigate(['/signin']);
   }
  
   isLoggedIn(): boolean {
-    return localStorage.getItem(this.loggedInKey) === 'true';
+    return !!this.getToken();
   }
 }

@@ -30,10 +30,12 @@ h2 {
 /* Themes */
 :root {
   color-scheme: light;  /* this is, so that the browser open in light mode as soon as we open it*/
+  
   --app-bg: var(--p-gray-50);
   --text-primary: var(--p-gray-800);
   --text-secondary: var(--p-gray-500);
   --border-color: var(--p-gray-200);
+  --sidebar-border: #e5e7eb;
 
   --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.05);
   --card-bg: #ffffff;
@@ -79,9 +81,11 @@ h2 {
     --indigo-soft: #e0e7ff;
 
   --surface-hover: #eef2ff; 
+  --selected-color: #e3f2fd;
 }
 
 body.dark-theme {
+  --sidebar-border: #1f2937;
   --app-bg: var(--p-gray-900);
   --table-bg: var(--p-gray-800);
   --card-bg: var(--p-gray-800);
@@ -131,6 +135,8 @@ body.dark-theme {
     --indigo-soft: rgba(165, 180, 252, 0.2);
 
     --surface-hover: #303030; 
+
+    --selected-color: #303030;
 }
 
 p {

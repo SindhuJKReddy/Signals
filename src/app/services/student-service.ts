@@ -1,17 +1,17 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { computed } from '@angular/core';
-import { list } from '@primeuix/themes/aura/autocomplete';
 
 export interface Student {
   id: number;
-  name: string;
+  firstName: string;
+  lastName: string;
   email: string;
-  phone: number;
-  grade: string;
-  enrollment: number;
-  department: string;
-  status: 'Active' | 'Inactive' | 'Suspended' | 'Graduated';
+  age: number;
+  course: string;
+  year: number;
+  rollNumber: string;
+  enrollmentDate: string;
 }
 
 @Injectable({
@@ -19,93 +19,138 @@ export interface Student {
 })
 export class StudentService {
 
+  private http = inject(HttpClient);
+  // private authService = inject(AuthService);
+
+  private apiUrl = 'http://192.168.5.13:5078/api/students';
+
+  // ✅ signal holds STUDENT data
+  private studentsSignal = signal<Student[]>([]);
+  students = this.studentsSignal.asReadonly();
+
   readonly selectedStudent = computed(() =>
     this.studentsSignal().find(s => s.id === this.selectedStudentId()) ?? null
   );
 
   previousStudentCount = signal<number>(0);
 
-  // ✅ signal holds STUDENT data
-  private studentsSignal = signal<Student[]>([]);
-  students = this.studentsSignal.asReadonly();
-
-  private http = inject(HttpClient);
-
-  // dialogVisible = signal(false);
   selectedStudentId = signal<number | null>(null);
 
-  constructor() {
-    this.loadStudents();
-  }
+  loadStudents() {
 
-
-  private loadStudents() {
     this.http
-      .get<Student[]>('http://localhost:4001/students')
-      .subscribe(data => {
-        this.previousStudentCount.set(this.studentsSignal().length);
-        this.studentsSignal.set(data);
-      });
-  }
+        .get<Student[]>(this.apiUrl)
+        .subscribe({
+          next: (data) => this.studentsSignal.set(data),
+          error: (err) => console.error('Students API failed', err)
+        });
+    }
 
-  addStudent(student: Student) {
-    this.studentsSignal.update(list => [...list, student]);
-  }
+  addStudentToApi(student: Student): void {;
 
-  updateStudent(updatedStudent: Student) {
-    this.studentsSignal.update(list =>
-      list.map(s =>
-        s.id === updatedStudent.id ? updatedStudent : s
-      )
-    );
-  }
+      this.http.post<Student>(this.apiUrl, student)
+        .subscribe({
+          next: (created) => {
+            this.studentsSignal.update(list => [...list, created]);
+            console.log('Student added successfully', created);
+          },
+          error: (err) => {
+            console.error('Add student failed', err);
+            alert('Failed to add student: ' + (err.error?.message || err.message || 'Unknown error'));
+          }
+        });
+    }
 
-  getStudentById(id: number) {
-    return this.students().find(s => s.id === id) ?? null;
-  }
+  updateStudentApi(student: Student): void {
+      this.http.put<Student>(`${this.apiUrl}/${student.id}`, student)
+        .subscribe({
+          next: (updated) => {
+            this.studentsSignal.update(list =>
+              list.map(s => s.id === updated.id ? updated : s)
+            );
+            console.log('Student updated successfully', updated);
+          },
+          error: (err) => {
+            console.error('Update failed', err);
+            alert('Failed to update student: ' + (err.error?.message || err.message || 'Unknown error'));
+          }
+        });
+    }
 
-  
-  deleteStudent(id: number) {
-    this.studentsSignal.update(list =>
-      list.filter(s => s.id !== id)
-    );
-  }
+  getStudentByIdFromApi(id: number) {
+      return this.http.get<Student>(`${this.apiUrl}/${id}`);
+    }
+
+  searchStudentById(id: number) {
+      this.http.get<Student>(`${this.apiUrl}/${id}`)
+        .subscribe({
+          next: (student) => {
+            this.studentsSignal.set([student]);
+          },
+          error: (err) => {
+            console.error('Student not found', err);
+            this.studentsSignal.set([]);
+          }
+        });
+    }
+
+  resetStudents() {
+      this.loadStudents();
+    }
+
+  deleteStudentApi(id: number) {
+  //     const token = this.authService.getToken();
+  //     if(!token) {
+  //       console.error('No token available');
+  //       return;
+  //     }
+
+  // const headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
+      this.http.delete(`${this.apiUrl}/${id}`)
+        .subscribe({
+          next: () => {
+            this.studentsSignal.update(list => list.filter(s => s.id !== id));
+            console.log('Student deleted successfully', id);
+          },
+          error: (err) => {
+            console.error('Delete failed', err);
+            alert('Failed to delete student: ' + (err.error?.message || err.message || 'Unknown error'));
+          }
+        });
+    }
 
   dialogVisible = signal(false);
 
- 
+    closeDialog() {
+      this.dialogVisible.set(false);
+      this.selectedStudentId.set(null);
+    }
 
-  closeDialog() {
-    this.dialogVisible.set(false);
-    this.selectedStudentId.set(null);
+    openEditDialog(id: number) {
+      this.selectedStudentId.set(id);
+      this.dialogVisible.set(true);
+    }
+
+    closeEditDialog() {
+      this.dialogVisible.set(false);
+      this.selectedStudentId.set(null);
+    }
+
+    // Add Student Dialog Methods
+    addDialogVisible = signal(false);
+
+    openAddDialog() {
+      this.addDialogVisible.set(true);
+    }
+
+    closeAddDialog() {
+      this.addDialogVisible.set(false);
+    }
+
+    deleteStudentsApi(ids: number[]) {
+      if (!confirm(`Delete ${ids.length} students permanently?`)) return;
+      ids.forEach(id => {
+        this.deleteStudentApi(id);
+      });
+    }
   }
-
-  openEditDialog(id: number) {
-    this.selectedStudentId.set(id);
-    this.dialogVisible.set(true);
-  }
-
-  closeEditDialog() {
-    this.dialogVisible.set(false);
-    this.selectedStudentId.set(null);
-  }
-
-  // Add Student Dialog Methods
-
-  addDialogVisible = signal(false);
-
-  openAddDialog() {
-    this.addDialogVisible.set(true);
-  }
-
-  closeAddDialog() {
-    this.addDialogVisible.set(false);
-  }
-
- deleteStudents(ids: number[]) {
-  this.studentsSignal.update(list =>
-    list.filter(student => !ids.includes(student.id))
-  );
-}
-
-}

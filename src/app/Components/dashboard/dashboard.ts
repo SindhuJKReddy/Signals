@@ -37,114 +37,113 @@ export class Dashboard {
     private studentService: StudentService,
     private teacherService: TeacherService,
     private workerService: WorkerService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
-  this.studentService.loadStudents(); 
-}
+    this.studentService.loadStudents();
+  }
 
   // Summary Cards using signals
 
   studentGrowthPercent = computed(() => {
-  const students = this.studentService.students();
-  if (students.length === 0) return 0;
+    const students = this.studentService.students();
+    if (students.length === 0) return 0;
 
-  const currentYear = new Date().getFullYear();
-  const lastYear = currentYear - 1;
+    const currentYear = new Date().getFullYear();
+    const lastYear = currentYear - 1;
 
-  const currentCount = students.filter(s => {
-    const d = new Date(s.enrollmentDate);
-    return !isNaN(d.getTime()) && d.getFullYear() === currentYear;
-  }).length;
+    const currentCount = students.filter(s => {
+      const d = new Date(s.enrollmentDate);
+      return !isNaN(d.getTime()) && d.getFullYear() === currentYear;
+    }).length;
 
-  const previousCount = students.filter(s => {
-    const d = new Date(s.enrollmentDate);
-    return !isNaN(d.getTime()) && d.getFullYear() === lastYear;
-  }).length;
+    const previousCount = students.filter(s => {
+      const d = new Date(s.enrollmentDate);
+      return !isNaN(d.getTime()) && d.getFullYear() === lastYear;
+    }).length;
 
-  if (previousCount === 0)
-    return currentCount > 0 ? 100 : 0;
+    if (previousCount === 0)
+      return currentCount > 0 ? 100 : 0;
 
-  return Math.round(((currentCount - previousCount) / previousCount) * 100);
-});
+    return Math.round(((currentCount - previousCount) / previousCount) * 100);
+  });
 
-/* totals */
-totalStudents = computed(() => this.studentService.students().length);
-totalTeachers = computed(() => this.teacherService.teachers().length);
-totalWorkers = computed(() => this.workerService.worker().length);
+  /* totals */
+  totalStudents = computed(() => this.studentService.students().length);
+  totalTeachers = computed(() => this.teacherService.teachers().length);
+  totalWorkers = computed(() => this.workerService.worker().length);
 
-activeStudents = computed(() => this.totalStudents());
-graduatedStudents = computed(() => this.totalStudents());
+  activeStudents = computed(() => this.totalStudents());
+  graduatedStudents = computed(() => this.totalStudents());
 
-totalStaff = computed(() => this.totalTeachers() + this.totalWorkers());
+  totalStaff = computed(() => this.totalTeachers() + this.totalWorkers());
 
-teacherSharePercent = computed(() => {
-  const staff = this.totalStaff();
-  return staff === 0 ? 0 : Math.round((this.totalTeachers() / staff) * 100);
-});
+  teacherSharePercent = computed(() => {
+    const staff = this.totalStaff();
+    return staff === 0 ? 0 : Math.round((this.totalTeachers() / staff) * 100);
+  });
 
-workerSharePercent = computed(() => {
-  const staff = this.totalStaff();
-  return staff === 0 ? 0 : Math.round((this.totalWorkers() / staff) * 100);
-});
+  workerSharePercent = computed(() => {
+    const staff = this.totalStaff();
+    return staff === 0 ? 0 : Math.round((this.totalWorkers() / staff) * 100);
+  });
 
-academicYear = '2025–2026';
-currentSemester = 'Spring';
-
+  academicYear = '2025–2026';
+  currentSemester = 'Spring';
 
   // Chart Data
   private chartColors = computed(() => {
     return this.isDarkMode()
       ? { text: '#f8fafc', grid: 'rgba(255, 255, 255, 0.1)', border: '#475569' }
-      : { text: '#64748b', grid: 'rgba(0, 0, 0, 0.05)', border: '#e2e8f0' }; 
+      : { text: '#64748b', grid: 'rgba(0, 0, 0, 0.05)', border: '#e2e8f0' };
   });
 
   enrollmentOption = computed(() => {
-  const students = this.students();
+    const students = this.students();
 
-  const months = [
-    'Jan','Feb','Mar','Apr','May','Jun',
-    'Jul','Aug','Sep','Oct','Nov','Dec'
-  ];
+    const months = [
+      'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+      'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+    ];
 
-  const counts = months.map((_, i) =>
-    students.filter(s => {
-      if (!s.enrollmentDate) return false;
-      const d = new Date(s.enrollmentDate);
-      return !isNaN(d.getTime()) && d.getMonth() === i;
-    }).length
-  );
+    const counts = months.map((_, i) =>
+      students.filter(s => {
+        if (!s.enrollmentDate) return false;
+        const d = new Date(s.enrollmentDate);
+        return !isNaN(d.getTime()) && d.getMonth() === i;
+      }).length
+    );
 
-  const colors = this.chartColors();
+    const colors = this.chartColors();
 
-  return {
-    tooltip: { trigger: 'axis' },
-    xAxis: {
-      type: 'category',
-      data: months,
-      axisLabel: { color: colors.text }
-    },
-    yAxis: {
-      type: 'value',
-      axisLabel: { color: colors.text },
-      splitLine: { lineStyle: { color: colors.grid } }
-    },
-    series: [
-      {
-        name: 'Enrollment',
-        type: 'line',
-        data: counts,
-        smooth: true,
-        symbol: 'circle',
-        symbolSize: 6,
-        lineStyle: { color: '#3b82f6', width: 3 },
-        itemStyle: { color: '#3b82f6' }
-      }
-    ]
-  };
-});
+    return {
+      tooltip: { trigger: 'axis' },
+      xAxis: {
+        type: 'category',
+        data: months,
+        axisLabel: { color: colors.text }
+      },
+      yAxis: {
+        type: 'value',
+        axisLabel: { color: colors.text },
+        splitLine: { lineStyle: { color: colors.grid } }
+      },
+      series: [
+        {
+          name: 'Enrollment',
+          type: 'line',
+          data: counts,
+          smooth: true,
+          symbol: 'circle',
+          symbolSize: 6,
+          lineStyle: { color: '#3b82f6', width: 3 },
+          itemStyle: { color: '#3b82f6' }
+        }
+      ]
+    };
+  });
 
-  
+
 
   // BAR CHART DATA- students by course
   studentsByCourseData = computed(() => {
@@ -163,7 +162,7 @@ currentSemester = 'Spring';
         type: 'category',
         data: Object.keys(courseMap),
         axisLabel: {
-          interval:0,
+          interval: 0,
         }
       },
       yAxis: {
@@ -214,6 +213,16 @@ currentSemester = 'Spring';
             { value: year3, name: 'Year 3' },
             { value: year4, name: 'Year 4' }
           ],
+          label: {
+            show: true,
+            fontSize: 12,     
+            color: 'grey'               
+          },
+          labelLine: {
+            lineStyle: {
+              width: 2
+            }
+          },
           emphasis: {
             itemStyle: {
               shadowBlur: 10,
@@ -221,7 +230,7 @@ currentSemester = 'Spring';
             }
           }
         }
-      ]
+      ],
     };
   });
 
@@ -250,9 +259,9 @@ currentSemester = 'Spring';
       xAxis: {
         type: 'category',
         data: courses,
-         axisLabel: {
-            interval: 0,
-         }
+        axisLabel: {
+          interval: 0,
+        }
       },
       yAxis: {
         type: 'value',

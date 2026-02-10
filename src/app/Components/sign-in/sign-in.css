@@ -1,10 +1,16 @@
+* {
+  margin: 0;
+  padding: 0;
+   box-sizing: border-box;
+}
+
 .auth-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
-  /* background: #f4f6fb; */
+  height: 100%;
   padding: 20px;
+  overflow: hidden;
 }
  
 .sign-card {

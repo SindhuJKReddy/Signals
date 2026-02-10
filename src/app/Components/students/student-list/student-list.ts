@@ -15,8 +15,6 @@ import { CommonModule } from '@angular/common';
 import { AddStudent } from './add-student/add-student';
 import { Select } from 'primeng/select';
 
-
-
 @Component({
   selector: 'app-student-list',
   standalone: true,
@@ -93,18 +91,37 @@ export class StudentList {
   }
 
   onSearchChange(value: string) {
-    if (!value || value.trim() === '') {
-      // Reset to show all students
-      this.studentService.resetStudents();
-    } else {
-      // Search by ID
-      const id = Number(value);
-      if (!isNaN(id)) {
-        this.studentService.searchStudentById(id);
-      }
-    }
+  const trimmedValue = value.trim();
+
+  if (!trimmedValue) {
+    this.studentService.resetStudents();
+    return;
   }
-  
+
+  const id = Number(trimmedValue);
+  if (!isNaN(id)) {
+    this.studentService.searchStudentById(id);
+    return;
+  }
+
+    const filtered = this.studentService.students().filter(student => {
+
+    const fullName = `${student.firstName} ${student.lastName}`.toLowerCase();
+
+    return (
+      student.firstName.toLowerCase().includes(trimmedValue.toLowerCase()) ||
+      student.lastName.toLowerCase().includes(trimmedValue.toLowerCase()) ||
+      fullName.includes(trimmedValue.toLowerCase()) ||
+      student.email.toLowerCase().includes(trimmedValue.toLowerCase()) ||
+      student.rollNumber.toLowerCase().includes(trimmedValue.toLowerCase()) ||
+      student.course.toLowerCase().includes(trimmedValue.toLowerCase()) ||
+      student.year.toString().includes(trimmedValue)
+    );
+  });
+
+  this.studentService.setStudents(filtered);
+}
+
   editStudent(student: Student) {
     this.studentService.openEditDialog(student.id);
   }
@@ -129,7 +146,6 @@ export class StudentList {
     this.studentService.openAddDialog();
   }
 
-  // Year filter
   yearOptions = [
     { label: 'All Years', value: null },
     { label: 'Year 1', value: 1 },
@@ -140,7 +156,6 @@ export class StudentList {
 
   selectedYear: number | null = null;
 
-  // Course filter
   courseOptions = [
     { label: 'All Courses', value: null },
     { label: 'CS', value: 'CS' },
@@ -197,11 +212,6 @@ export class StudentList {
   selectedStudents: Student[] = [];
 
   deleteSelected() { 
-    // const confirmed = confirm('Are you sure you want to delete?');
-    
-    // if (!confirmed) {
-    //   return;
-    // }  
 
     const ids = this.selectedStudents.map(s => s.id);
 

@@ -20,7 +20,6 @@ export interface Student {
 export class StudentService {
 
   private http = inject(HttpClient);
-  // private authService = inject(AuthService);
 
   private apiUrl = 'http://192.168.5.13:5078/api/students';
 
@@ -66,7 +65,9 @@ export class StudentService {
         .subscribe({
           next: (updated) => {
             this.studentsSignal.update(list =>
-              list.map(s => s.id === updated.id ? updated : s)
+              list.map(s => s.id === updated.id 
+                ? {...s, ...updated, rollNumber: student.rollNumber} 
+                 : s)
             );
             console.log('Student updated successfully', updated);
           },
@@ -93,6 +94,11 @@ export class StudentService {
           }
         });
     }
+
+    setStudents(filtered: Student[]) {
+    this.studentsSignal.set(filtered);
+}
+
 
   resetStudents() {
       this.loadStudents();

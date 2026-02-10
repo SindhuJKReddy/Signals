@@ -1,20 +1,27 @@
 @import "primeicons/primeicons.css";
 
-* {
-    padding: 0;
-    margin: 0;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+
+html,
+body,
+app-root {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont,
+  'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell;
+  overflow: hidden;
 }
 
-h2 {
-    color: var(--h2-color);
+p {
+  color: var(--p-text-color);
 }
 
 .container {
-    display: flex;
-    gap: 1rem;
-    padding: 5px;
-    margin-bottom: 10px;
+  display: flex;
+  gap: 1rem;
+  padding: 5px;
+  margin-bottom: 10px;
 }
 
 .card .p-chart {
@@ -27,46 +34,30 @@ h2 {
   }
 }
 
-/* Themes */
 :root {
-  color-scheme: light;  /* this is, so that the browser open in light mode as soon as we open it*/
-  
-  --app-bg: var(--p-gray-50);
-  --text-primary: var(--p-gray-800);
-  --text-secondary: var(--p-gray-500);
-  --border-color: var(--p-gray-200);
+  color-scheme: light;
+
+  --app-bg: #f8fafc;
+  --sidebar-bg: #f3f4f6;
   --sidebar-border: #e5e7eb;
 
-  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.05);
-  --card-bg: #ffffff;
-  --p-text-color: #374151; /* dark gray for light mode */
-  --dashboard-text-color: #374151;
-  --h2-color: black;
-  --footer-text-color: black;
-  --footer-h4-color: black;
-  --search-color: black;
-  --th-background-color: #ffffff;
-  --sidebar-bg: #f3f4f6;
-  --router-link-color: black;
-  --theme-toggle-color: black;
-  --a-color: black;
-  --dialog-bg: #ffffff;
-  --dialog-text: #111827;
-  --input-bg: #ffffff;
-  --button-cancel-bg: #ffffff;
-  --button-cancel-hover: #f5f6f8;
-  --summary-card-bg: #ffffff;  
-  --sidebar-active-color: #e0e7ff;  
-  --sidebar-hover-bg: #e2e5e9;
-  --user-info-bg: #e0e7ff;
+  --summary-card-bg: #ffffff;
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.1);
 
-  --table-bg: #ffffff;
-  --table-background-color: #ffffff;
-  --tr-color: #ffffff;
-  --td-color: black;
-  --table-hover-bg: #f3f6fb;
-  --table-hover-text: #111827;
-  --table-header-bg: #ffffff;
+  --sidebar-active-color: #e0e7ff;
+  --sidebar-hover-bg: #e2e5e9;
+  --user-info-bg: #e7ecf0;
+
+  --edit-hover-bg: rgba(34, 197, 94, 0.15);
+  --delete-hover-bg: rgba(239, 68, 68, 0.15);
+
+  --card-bg: #ffffff;
+  --summary-card-bg: #ffffff;
+  --quickstats-bg: #ffffff;
+
+  --delete-background: #e0e7ff;
+  --delete-btn-bg: var(--color-blue-50);
+  --delete-btn-text: #1e3a8a;
 
   --primary: #2563eb;
     --primary-soft: #dbeafe;
@@ -80,49 +71,40 @@ h2 {
     --indigo: #6366f1;
     --indigo-soft: #e0e7ff;
 
-  --surface-hover: #eef2ff; 
-  --selected-color: #e3f2fd;
+    --table-bg: #fcfdfd;
+    --table-hover-bg: #f3f4f6;
 }
 
-body.dark-theme {
+.p-dark {
+  color-scheme: dark;
+
+  --app-bg: #080d18;
+  --sidebar-bg: #111827;
   --sidebar-border: #1f2937;
-  --app-bg: var(--p-gray-900);
-  --table-bg: var(--p-gray-800);
-  --card-bg: var(--p-gray-800);
-  --text-primary: var(--p-gray-100);
-  --text-secondary: var(--p-gray-400);
-  --border-color: var(--p-gray-700);
-  --summary-card-bg: var(--p-gray-800);
+
+  --summary-card-bg: #111827;
   --shadow-sm: 0 8px 20px rgba(0, 0, 0, 0.35);
-  --p-text-color: #ffffff; /* white in dark mode */
-  --dashboard-text-color: #ffffff; 
-  --h2-color: white;
-  --footer-text-color: #ffffff;
-  --footer-h4-color: #ffffff;
-  --search-color: #ffffff;
-  --sidebar-bg: #020617;
-  --router-link-color: #ffffff;
-  --theme-toggle-color: #ffffff;
-  --a-color: #ffffff;
-  --dialog-bg: #020617;
-  --dialog-text: #e5e7eb;
-  --input-bg: #020617;
-  --button-cancel-bg: #020617;
-  --button-cancel-hover: #0b1220;
+
   --sidebar-active-color: #1e3a8a;
   --sidebar-hover-bg: #546072;
-  --user-info-bg: rgb(36, 34, 34);
+  --user-info-bg: #1e293b;
 
-  --table-hover-bg: #2a2a2a;
-  --table-hover-text: #9ca3af;
-  --table-background-color: black;
-  --td-color: #ffffff;
-  --th-background-color: rgb(33, 31, 31);
-  --th-color: #ffffff;
-  --tr-color: var(--p-gray-900);
-  --table-header-bg: var(--p-gray-800);
+  --edit-hover-bg: rgba(34, 197, 94, 0.2);
+  --delete-hover-bg: rgba(239, 68, 68, 0.2);
 
-    --primary: #60a5fa;
+   --card-bg: #111827;          /* gray-800 */
+  --summary-card-bg: #1f2937;
+  --quickstats-bg: #111827;  
+ 
+  --delete-background: #1d2942;
+  --delete-btn-bg: color-mix(
+    in srgb,
+    oklch(.379 .146 265.522) 20%,
+    transparent
+  );
+  --delete-btn-text: #ffffff;
+
+  --primary: #60a5fa;
     --primary-soft: rgba(96, 165, 250, 0.2);
  
     --success: #34d399;
@@ -132,31 +114,55 @@ body.dark-theme {
     --warning-soft: rgba(251, 191, 36, 0.2);
  
     --indigo: #a5b4fc;
-    --indigo-soft: rgba(165, 180, 252, 0.2);
+    --indigo-soft: rgba(165, 180, 252, 0.2); 
 
-    --surface-hover: #303030; 
-
-    --selected-color: #303030;
+    --table-bg: #111827;
+    --table-hover-bg: #1f2937;
 }
 
-p {
-  color: var(--p-text-color);
+.p-datatable .p-datatable-thead > tr > th,
+.p-datatable .p-datatable-tbody > tr > td {
+  background: var(--table-bg) !important;
+  color: var(--text-primary) !important;
 }
 
-.p-datatable .p-datatable-header {
-  background: var(--table-header-bg) !important;
-  border: none;
+.p-datatable .p-datatable-tbody > tr:hover > td {
+  background: var(--table-hover-bg) !important;
+}
+ 
+.p-datatable .p-datatable-thead > tr > th:hover {
+  background: var(--table-hover-bg) !important;
 }
 
-.p-dialog .p-dialog-header,
-.p-dialog .p-dialog-content,
-.p-dialog .p-dialog-footer {
-  background: var(--dialog-bg);
-  color: var(--dialog-text);
+body {
+  background: var(--app-bg);
 }
 
+.sidebar {
+  background: var(--sidebar-bg);
+  border-right: 1px solid var(--sidebar-border);
+}
 
+.summary-card {
+  background: var(--summary-card-bg);
+  box-shadow: var(--shadow-sm);
+  border-radius: 12px;
+}
 
+.edit-hover:hover {
+  background: var(--edit-hover-bg);
+}
 
+.delete-hover:hover {
+  background: var(--delete-hover-bg);
+}
 
+.p-datatable-header {
+  background: none !important;
+}
 
+.p-datatable-header {
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+}

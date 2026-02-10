@@ -1,6 +1,7 @@
 * {
-    margin: 0;
-    padding: 0; 
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
 }
 
 html, body {
@@ -10,7 +11,7 @@ html, body {
 .main-content {
     flex-grow: 1;
     padding: 2rem;
-    overflow-y: auto;
+    overflow: hidden;
 }
 
 .app-container {
@@ -23,7 +24,6 @@ html, body {
     font-size: 1.2rem;
     font-weight: 600;
     margin-bottom: 1.5rem;
-    
 }
 
 a {
@@ -35,16 +35,6 @@ a {
     border-radius: 6px;
 }
 
-.sidebar a:hover {
-    background: var(--surface-hover);
-    color: var(--a-color);
-}
-
-.sidebar a.active {
-  background: var(--sidebar-active-color);
-  color: #60a5fa;
-}
-
 .sidebar {
    width: 300px;
   height: 100vh;
@@ -53,6 +43,16 @@ a {
   display: flex;
   flex-direction: column;
   padding: 1.5rem;
+}
+
+.sidebar a:hover {
+    background: var(--surface-hover);
+    color: var(--a-color);
+}
+
+.sidebar a.active {
+  background: var(--sidebar-active-color);
+  color: #60a5fa;
 }
 
 .sidebar a {
@@ -89,31 +89,32 @@ a.active {
 }
 
 .theme-toggle {
-    width: 200px;
-    border-radius: 6px;
-    cursor: pointer;
-    padding: 10px;
-    margin-top: 330px;
-    margin-left: 25px;
-   transition: transform 0.2s ease, box-shadow 0.2s ease;
-   color: var(--theme-toggle-color);  
+    margin-top: auto;
+  padding-top: 1rem;
+  display: flex;
+  padding: 10px;
+  border-radius: 6px;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  color: var(--theme-toggle-color);
+  font-size: 14px;
+  transition: all 0.3s ease;
 }
 
 .theme-toggle:hover {
-    background: var(--surface-hover);
+    background: var(--sidebar-hover-bg);
 }
 
 .logout {
     background: transparent;
-    margin: 25px;
-    text-align: left;
-    width: 200px;
-    padding: 10px;
-    border: none;
-    border-radius: 6px;
-    color: #f44336;
-    font-size: 1rem;
-    cursor: pointer;
+  text-align: left;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  color: #f44336;
+  font-size: 1rem;
+  cursor: pointer;
 }
 
 .logout:hover {

@@ -13,9 +13,9 @@ export const routes: Routes = [
       { path: '', redirectTo: 'signin', pathMatch: 'full' },
       {path: 'signin', component: SignIn, data: { showSidebar: false } },
       {path: 'signup', component: SignUp, data: { showSidebar: false }},
-      { path: 'student-list', component: StudentList, canActivate: [authGuard], data: { showSidebar: true } },
-      { path: 'teachers-list', component: TeachersList, canActivate: [authGuard], data: { showSidebar: true } },
-      { path: 'workers-list', component: WorkersList, canActivate: [authGuard], data: { showSidebar: true } },
+      { path: 'student-list', component: StudentList, canActivate: [authGuard] },
+      { path: 'teachers-list', component: TeachersList, canActivate: [authGuard] },
+      { path: 'workers-list', component: WorkersList, canActivate: [authGuard] },
       { path: 'dashboard',component: Dashboard, canActivate: [authGuard], data: { showSidebar: true } },
       { path: '**', redirectTo: 'signin' }
 ];

@@ -8,7 +8,7 @@
            pButton 
            label="Export CSV" 
            icon="pi pi-download" 
-           class="p-button-success"
+           class="p-button-csv"
            (click)="exportCSV()">
         </button>
 
@@ -44,14 +44,15 @@
     #dt 
     [value]="students()" 
     [scrollable]="true" 
-    scrollHeight="calc(100vh - 120px)" 
+    scrollHeight="700px" 
     dataKey="id" 
     selectionMode="multiple" 
     [(selection)]="selectedStudents" 
-    [globalFilterFields]="['firstName', 'lastName', 'email']"
-    [tableStyle]="{ 'min-width': '100vh' }">
+    [globalFilterFields]="['firstName', 'lastName', 'email', 'course', 'year', 'rollNumber']"
+    [tableStyle]="{ 'min-width': '100%' }"
+    >
 
-        <!-- 🔍 Global Search -->
+        <!-- Global Search -->
         <ng-template #caption>
             <div class="filters">
                 <p-iconfield iconPosition="left">
@@ -62,7 +63,8 @@
                          pInputText 
                          type="text" 
                          (input)="onSearchChange($event.target.value)"
-                         placeholder="Search students"    class="global-search" />
+                         placeholder="Search students"    
+                         class="global-search" />
                     </p-iconfield>
 
                 <p-select 
@@ -102,7 +104,7 @@
 
         </ng-template>
 
-        <!-- 🧾 Table Header -->
+        <!--  Table Header -->
         <ng-template pTemplate="header">
       <tr>
         <th style="width: 3rem"><p-tableHeaderCheckbox></p-tableHeaderCheckbox></th>
@@ -117,7 +119,7 @@
       </tr>
     </ng-template>
 
-        <!-- 📄 Table Body -->
+        <!--  Table Body -->
         <ng-template pTemplate="body" let-student>
       <tr class="student-row">
         <td><p-tableCheckbox [value]="student"></p-tableCheckbox></td>
@@ -138,7 +140,7 @@
       </tr>
     </ng-template>
 
-        <!-- 🚫 Empty Message -->
+        <!--  Empty Message -->
         <ng-template #emptymessage>
             <tr>
                 <td colspan="3">No students found</td>

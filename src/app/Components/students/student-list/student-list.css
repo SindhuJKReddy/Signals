@@ -1,4 +1,7 @@
-
+* {
+    margin: 0;
+    padding: 0; 
+}
 .header-section{
     display: flex;
     gap: 1rem;
@@ -10,27 +13,22 @@
     flex: 1;
 }
 
-.add-button{
-    background-color: #1976d2;
-    border-color: #1976d2;
-}
-
 .filters {
     display: flex;
+    align-items: center;
     gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.filters p-iconfield {
+  flex: 1;
+  min-width: 280px;
 }
 
 .global-search {
-    width: 1050px;
+    width: 100%;
 }
 
-.table-actions {
-  display: flex;
-  gap: 12px;
-  margin-bottom: 17px;
-}
-
-/* Selection bar container */
 .selection-bar {
   display: flex;
   align-items: center;
@@ -51,52 +49,49 @@
   margin-left: auto;
 }
 
- :host ::ng-deep .p-datatable-tbody > tr {
-  background-color: var(--tr-color);
-}
-:host ::ng-deep .p-datatable-tbody > tr > td > th {
-  color: var(--td-color);
-}
-
-:host ::ng-deep .p-datatable .p-datatable-tbody > tr:hover > td {
-  background-color: var(--table-hover-bg) !important;
-  color: var(--table-hover-text) !important;
-}
-
-
-.student-row tr {
-  background: var(--tr-color);
-}
-
-td {
-  color: var(--td-color);
-}
-
-tr th td {
-  background: var(--th-background-color);
-  color: var(--th-color);
-}
-
 .year-dropdown,
 .course-dropdown {
-  background: var(--table-background-color);
-  color: whitesmoke;
-}
-
-:host ::ng-deep .p-datatable .p-datatable-thead > tr > th {
-  background-color: var(--th-background-color);
-  color: var(--th-color, var(--p-text-color));
-  border-color: var(--border-color);
+  background: var(--table-bg);
+  width: 250px;
 }
 
 :host ::ng-deep .p-inputtext {
   background-color: var(--table-bg);
-  color: var(--search-color);
-  border-color: var(--border-color);
 }
 
-:host ::ng-deep .p-inputtext::placeholder {
-  color: var(--text-secondary);
+.add-button {
+    background-color: #1976d2;
+    border-color: #1976d2;
 }
 
+.p-button-csv.p-button:hover {
+  background-color: #2db583;
+  border-color:#2db583;
+}
 
+.p-button-help.p-button:hover {
+  background-color: #ab74e1;
+  border-color: #c084fc;
+}
+
+.add-button.p-button:hover {
+  background-color: #125aa8 !important; 
+  border-color: #125aa8 !important;
+  color: #ffffff !important;
+}
+
+.p-button-csv.p-button:hover,
+.p-button-help.p-button:hover,
+.add-button.p-button:hover {
+  color: #ffffff !important;
+}
+
+.p-button-csv,
+.p-button-help,
+.add-button {
+  color: #ffffff;
+}
+
+.selection-bar {
+  background: var(--delete-background);
+}

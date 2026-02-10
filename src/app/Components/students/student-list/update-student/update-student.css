@@ -3,7 +3,9 @@
     font-weight: 600;
     margin-bottom: 0.35rem;
 }
-
+.p-dialog {
+    border-radius: 12px;
+}
 .grid-form {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -62,7 +64,7 @@ select {
 }
 
 .btn-cancel:hover {
-    background: #f1f5f9 !important;
+    background: #c3c8cd !important;
     border-color: #cbd5e1 !important;
     color: black !important;
 }
@@ -78,5 +80,6 @@ select {
 }
 
 .btn-update:hover {
-  background: #1d4ed8;
+  background: #1d4ed8 ;
+  border-color: #1d4ed8;
 }

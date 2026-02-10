@@ -1,13 +1,11 @@
 import { Component } from '@angular/core';
 import { WorkerService, Worker } from '../../../services/worker-service';
-import { RouterOutlet } from '@angular/router';
 import { TableModule } from 'primeng/table';
 import { InputTextModule } from 'primeng/inputtext';
 import { IconField } from 'primeng/iconfield';
 import { InputIcon } from 'primeng/inputicon';
 import { TagModule } from 'primeng/tag';
 import { ButtonModule } from 'primeng/button';
-import { AddStudent } from '../../students/student-list/add-student/add-student';
 import { AddWorkers } from './add-workers/add-workers';
 import { ToastModule } from 'primeng/toast';
 import { DialogModule } from 'primeng/dialog';
@@ -16,7 +14,6 @@ import { Select } from 'primeng/select';
 import { UpdateWorkers } from './update-workers/update-workers';
 import { CommonModule } from '@angular/common';
 import { MessageService } from 'primeng/api';
-import { Teacher } from '../../../services/teacher-service';
 
 @Component({
   selector: 'app-workers-list',

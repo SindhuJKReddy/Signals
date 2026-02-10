@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0; 
 }
+
 .header-section{
     display: flex;
     gap: 1rem;

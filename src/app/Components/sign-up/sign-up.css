@@ -29,7 +29,7 @@
 }
  
 .card {
-  background: #ffffff;
+  background: var(--card-bg);
   padding: 28px;
   border-radius: 14px;
   width: 450px;
@@ -47,7 +47,6 @@ input {
   border-color: #f44336 !important;
   outline: none;
 }
- 
  
 .error {
   color: #f44336;
@@ -121,4 +120,8 @@ small {
  
 .signup-text {
   font-size: 1rem;
+}
+
+label {
+  color: grey;
 }
